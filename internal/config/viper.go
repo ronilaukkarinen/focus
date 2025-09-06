@@ -10,30 +10,31 @@ import (
 
 // viperKeys defines the mapping between config keys and their Viper counterparts.
 const (
-	keyWorkDuration         = "work.duration"
-	keyWorkMessage          = "work.message"
-	keyWorkSound            = "work.sound"
-	keyWorkColor            = "work.color"
-	keyShortBreakDuration   = "short_break.duration"
-	keyShortBreakMessage    = "short_break.message"
-	keyShortBreakSound      = "short_break.sound"
-	keyShortBreakColor      = "short_break.color"
-	keyLongBreakDuration    = "long_break.duration"
-	keyLongBreakMessage     = "long_break.message"
-	keyLongBreakSound       = "long_break.sound"
-	keyLongBreakColor       = "long_break.color"
-	keyLongBreakInterval    = "settings.long_break_interval"
-	keyAutoStartWork        = "settings.auto_start_work"
-	keyAutoStartBreak       = "settings.auto_start_break"
-	keySoundOnBreak         = "settings.sound_on_break"
-	keyStrict               = "settings.strict"
-	keyNotificationsEnabled = "notifications.enabled"
-	keyAmbientSound         = "settings.ambient_sound"
-	keySessionCmd           = "settings.cmd"
-	keyTwentyFourHour       = "settings.24hr_clock"
-	keyFlowBell             = "settings.flow_bell"
-	keyFlowBellSound        = "settings.flow_bell_sound"
-	keyDarkTheme            = "display.dark_theme"
+	keyWorkDuration         = "work_duration"
+	keyWorkMessage          = "work_msg"
+	keyWorkSound            = "work_sound"
+	keyWorkColor            = "work_color"
+	keyShortBreakDuration   = "short_break_duration"
+	keyShortBreakMessage    = "short_break_msg"
+	keyShortBreakSound      = "break_sound"
+	keyShortBreakColor      = "short_break_color"
+	keyLongBreakDuration    = "long_break_duration"
+	keyLongBreakMessage     = "long_break_msg"
+	keyLongBreakSound       = "break_sound"
+	keyLongBreakColor       = "long_break_color"
+	keyLongBreakInterval    = "long_break_interval"
+	keyAutoStartWork        = "auto_start_work"
+	keyAutoStartBreak       = "auto_start_break"
+	keySoundOnBreak         = "sound_on_break"
+	keyStrict               = "strict"
+	keyNotificationsEnabled = "notify"
+	keyAmbientSound         = "sound"
+	keySessionCmd           = "session_cmd"
+	keyTwentyFourHour       = "24hr_clock"
+	keyFlowBell             = "flow_bell"
+	keyFlowBellSound        = "flow_bell_sound"
+	keyFlowDefault          = "flow_default"
+	keyDarkTheme            = "dark_theme"
 )
 
 // WithViperConfig returns an Option that loads configuration from Viper.
@@ -87,6 +88,7 @@ func setupViper(v *viper.Viper, c *Config) {
 	v.SetDefault(keyStrict, false)
 	v.SetDefault(keyFlowBell, true)
 	v.SetDefault(keyFlowBellSound, "tibetan_bell")
+	v.SetDefault(keyFlowDefault, false)
 	v.SetDefault(keyAmbientSound, "")
 	v.SetDefault(keySessionCmd, "")
 
@@ -113,5 +115,36 @@ func setupViper(v *viper.Viper, c *Config) {
 
 // loadViperConfig loads configuration from Viper into the Config struct.
 func loadViperConfig(v *viper.Viper, c *Config) error {
-	return v.Unmarshal(c)
+	// Manually map flat config to nested structs
+	c.Work.Duration = v.GetDuration(keyWorkDuration)
+	c.Work.Message = v.GetString(keyWorkMessage)
+	c.Work.Sound = v.GetString(keyWorkSound)
+	c.Work.Color = v.GetString(keyWorkColor)
+	
+	c.ShortBreak.Duration = v.GetDuration(keyShortBreakDuration)
+	c.ShortBreak.Message = v.GetString(keyShortBreakMessage)
+	c.ShortBreak.Sound = v.GetString(keyShortBreakSound)
+	c.ShortBreak.Color = v.GetString(keyShortBreakColor)
+	
+	c.LongBreak.Duration = v.GetDuration(keyLongBreakDuration)
+	c.LongBreak.Message = v.GetString(keyLongBreakMessage)
+	c.LongBreak.Sound = v.GetString(keyLongBreakSound)
+	c.LongBreak.Color = v.GetString(keyLongBreakColor)
+	
+	c.Settings.LongBreakInterval = v.GetInt(keyLongBreakInterval)
+	c.Settings.AutoStartWork = v.GetBool(keyAutoStartWork)
+	c.Settings.AutoStartBreak = v.GetBool(keyAutoStartBreak)
+	c.Settings.SoundOnBreak = v.GetBool(keySoundOnBreak)
+	c.Settings.Strict = v.GetBool(keyStrict)
+	c.Settings.AmbientSound = v.GetString(keyAmbientSound)
+	c.Settings.Cmd = v.GetString(keySessionCmd)
+	c.Settings.TwentyFourHour = v.GetBool(keyTwentyFourHour)
+	c.Settings.FlowBell = v.GetBool(keyFlowBell)
+	c.Settings.FlowBellSound = v.GetString(keyFlowBellSound)
+	c.Settings.FlowDefault = v.GetBool(keyFlowDefault)
+	
+	c.Notifications.Enabled = v.GetBool(keyNotificationsEnabled)
+	c.Display.DarkTheme = v.GetBool(keyDarkTheme)
+	
+	return nil
 }

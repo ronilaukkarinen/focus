@@ -46,6 +46,7 @@ type (
 		TwentyFourHour    bool   `mapstructure:"24hr_clock"`
 		FlowBell          bool   `mapstructure:"flow_bell"`
 		FlowBellSound     string `mapstructure:"flow_bell_sound"`
+		FlowDefault       bool   `mapstructure:"flow_default"`
 	}
 
 	// arguments.

@@ -187,6 +187,8 @@ flow_bell: true # play bell sounds at flow timer milestones (50% and 100%)
 
 flow_bell_sound: 'tibetan_bell' # sound file for flow timer bells (bell, loud_bell, tibetan_bell)
 
+flow_default: false # use flow timer mode by default (can still be overridden with --flow flag)
+
 session_cmd: '' # execute an arbitrary command after each session
 ```
 

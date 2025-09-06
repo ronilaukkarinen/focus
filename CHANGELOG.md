@@ -14,6 +14,8 @@ Features and enhancements:
 - Send desktop notifications at flow timer milestones (halfway and completion).
 - Flow mode integrates with existing notification settings and work sound configuration.
 - Prevent keyboard shortcuts from interfering with form input during prompts.
+- Fix the code to support flat config.yml structure
+- Add `flow_default` configuration option
 
 Bug fixes:
 

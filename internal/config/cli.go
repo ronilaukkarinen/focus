@@ -26,6 +26,7 @@ type CLIOptions struct {
 	SoundOnBreak      bool
 	Strict            bool
 	FlowMode          bool
+	FlowModeSet       bool // tracks if flow flag was explicitly set
 }
 
 // WithCLIConfig returns an Option that loads configuration from CLI flags.
@@ -46,6 +47,7 @@ func WithCLIConfig(ctx *cli.Context) Option {
 			SoundOnBreak:      ctx.Bool("sound-on-break"),
 			Strict:            ctx.Bool("strict"),
 			FlowMode:          ctx.Bool("flow"),
+			FlowModeSet:       ctx.IsSet("flow"),
 		}
 
 		return applyCLIOptions(c, opts)
@@ -70,7 +72,11 @@ func applyCLIOptions(c *Config, opts CLIOptions) error {
 		c.Settings.Strict = true
 	}
 
-	if opts.FlowMode {
+	// If FlowMode is explicitly set via CLI, use that value
+	// Otherwise, use the config default if set to true
+	if opts.FlowModeSet {
+		c.CLI.FlowMode = opts.FlowMode
+	} else if c.Settings.FlowDefault {
 		c.CLI.FlowMode = true
 	}
 

@@ -1,6 +1,6 @@
 module github.com/ayoisaiah/focus
 
-go 1.24.2
+go 1.24
 
 tool (
 	github.com/boyter/scc/v3
