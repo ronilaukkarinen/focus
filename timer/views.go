@@ -61,7 +61,7 @@ func (t *Timer) timerView() string {
 				lipgloss.NewStyle().
 					Foreground(lipgloss.Color(t.Opts.Work.Color)).
 					MarginRight(1).
-					SetString("📝 " + t.taskName).
+					SetString(t.taskName).
 					String(),
 			)
 			s.WriteString("\n")
