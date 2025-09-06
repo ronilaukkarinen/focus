@@ -57,6 +57,55 @@ Focus is written in Go, so you can install it through `go install` (requires Go
 go install github.com/ayoisaiah/focus/cmd/focus@latest
 ```
 
+### 🛠️ Installing from Source
+
+To install this specific version from source:
+
+1. **Ensure you have Go 1.23 or later installed** (this version requires Go 1.23+):
+   ```bash
+   go version
+   ```
+   
+   If you need to upgrade Go:
+   ```bash
+   # Download and install Go 1.23+ from https://golang.org/dl/
+   # Or use your package manager:
+   
+   # Ubuntu/Debian (snap)
+   sudo snap install go --classic
+   
+   # Or download directly:
+   wget https://go.dev/dl/go1.23.4.linux-amd64.tar.gz
+   sudo rm -rf /usr/local/go && sudo tar -C /usr/local -xzf go1.23.4.linux-amd64.tar.gz
+   export PATH=/usr/local/go/bin:$PATH
+   
+   # Make it permanent:
+   echo 'export PATH=/usr/local/go/bin:$PATH' >> ~/.bashrc
+   source ~/.bashrc
+   ```
+
+2. **Clone and install locally**:
+   ```bash
+   git clone https://github.com/ronilaukkarinen/focus.git
+   cd focus
+   go install ./cmd/focus
+   ```
+
+   Or install directly from git:
+   ```bash
+   go install github.com/ronilaukkarinen/focus/cmd/focus@latest
+   ```
+
+3. **Ensure Go's bin directory is in your PATH**:
+   ```bash
+   # Add Go bin to PATH
+   export PATH=$PATH:$(go env GOPATH)/bin
+   
+   # Make it permanent:
+   echo 'export PATH=$PATH:$(go env GOPATH)/bin' >> ~/.bashrc
+   source ~/.bashrc
+   ```
+
 On Linux, the `libasound2-dev` package is required to compile Focus. Ubuntu or
 Debian users can install it through the command below:
 
