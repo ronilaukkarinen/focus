@@ -3,13 +3,13 @@ name: Release Focus
 env:
   dev_tag: nightly
   go_version: 1.24
-  REPO_OWNER: ${{ vars.REPO_OWNER }}
-  REPO_WEBSITE: ${{ vars.REPO_WEBSITE }}
-  REPO_DESCRIPTION: ${{ vars.REPO_DESCRIPTION }}
-  REPO_MAINTAINER: ${{ vars.REPO_MAINTAINER }}
-  REPO_AUTHOR_NAME: ${{ vars.REPO_AUTHOR_NAME }}
-  REPO_AUTHOR_EMAIL: ${{ vars.REPO_AUTHOR_EMAIL }}
-  REPO_BINARY_NAME: ${{ vars.REPO_BINARY_NAME }}
+  REPO_OWNER: ronilaukkarinen
+  REPO_WEBSITE: https://github.com/ronilaukkarinen/focus
+  REPO_DESCRIPTION: Focus is a flexible command-line productivity timer with flow mode for uninterrupted work sessions
+  REPO_MAINTAINER: Roni Laukkarinen
+  REPO_AUTHOR_NAME: Roni Laukkarinen
+  REPO_AUTHOR_EMAIL: roni@dude.fi
+  REPO_BINARY_NAME: focus
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 on:

@@ -122,7 +122,7 @@ winget:
 scoops:
   - ids:
       - windows-only
-    url_template: 'https://github.com/ayoisaiah/focus/releases/download/{{ .Tag }}/{{ .ArtifactName }}'
+    url_template: 'https://github.com/ronilaukkarinen/focus/releases/download/{{ .Tag }}/{{ .ArtifactName }}'
     repository:
       owner: '{{ .Env.REPO_OWNER }}'
       name: scoop-bucket
