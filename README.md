@@ -8,7 +8,7 @@
    <a href="https://goreportcard.com/report/github.com/ronilaukkarinen/focus"><img src="https://goreportcard.com/badge/github.com/ronilaukkarinen/focus" alt="GoReportCard"></a>
    <a href="https://github.com/ronilaukkarinen/focus"><img src="https://img.shields.io/badge/go-1.24-blue.svg" alt="Go version"></a>
    <a href="https://github.com/ronilaukkarinen/focus/blob/master/LICENCE"><img src="https://img.shields.io/github/license/ronilaukkarinen/focus.svg" alt="LICENCE"></a>
-   <a href="https://github.com/ronilaukkarinen/focus/releases/"><img src="https://img.shields.io/badge/version-1.5.1-blue.svg" alt="Latest release"></a>
+   <a href="https://github.com/ronilaukkarinen/focus/releases/"><img src="https://img.shields.io/badge/version-1.5.2-blue.svg" alt="Latest release"></a>
 </p>
 
 <h1 align="center">Focus on your task - with flow timer!</h1>
@@ -471,6 +471,21 @@ focus delete --start '2023-02-21 21:21:00'
 
 Bug reports and feature requests are much welcome! Please open an issue before
 creating a pull request.
+
+## 🛠️ Development
+
+This project includes comprehensive development tooling:
+
+- **Linting**: Run `just lint` to check code quality with golangci-lint
+- **Testing**: Run `just test` for comprehensive test suite
+- **Pre-commit hooks**: Automatic linting and formatting on commit
+- **Build tools**: Run `just build` to compile binaries
+
+The project uses:
+- [just](https://github.com/casey/just) for task running
+- [golangci-lint v2](https://golangci-lint.run/) for code quality
+- [pre-commit](https://pre-commit.com/) for git hooks
+- tools.mod for development dependency management
 
 ## ⚖ Licence
 

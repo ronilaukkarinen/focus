@@ -210,7 +210,7 @@ func (t *Timer) setAmbientSound() error {
 		return err
 	}
 
-	infiniteStream := beep.Loop2(stream)
+	infiniteStream, _ := beep.Loop2(stream)
 	t.SoundStream = infiniteStream
 
 	speaker.Play(t.SoundStream)

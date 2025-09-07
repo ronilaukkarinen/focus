@@ -2,3 +2,28 @@ version: "2"
 run:
   build-tags:
     - nosound
+  timeout: 5m
+  
+linters:
+  default: none
+  enable:
+    - errcheck
+    - govet
+    - ineffassign
+    - staticcheck
+    - unused
+
+linters-settings:
+  errcheck:
+    check-type-assertions: true
+  govet:
+    enable:
+      - fieldalignment
+
+issues:
+  max-issues-per-linter: 0
+  max-same-issues: 0
+  exclude-dirs:
+    - vendor
+  exclude-patterns:
+    - "//nolint:"

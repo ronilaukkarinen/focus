@@ -1,3 +1,12 @@
+## 1.5.2 (2025-09-07)
+
+Bug fixes:
+
+- Fix beep.Loop2 function call to handle two return values correctly
+- Improve golangci-lint configuration for better development workflow  
+- Add comprehensive linter fixes: errcheck, staticcheck, and unused code warnings
+- Update development tooling documentation
+
 ## 1.5.1 (2025-09-07)
 
 Bug fixes:
