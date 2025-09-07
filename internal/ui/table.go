@@ -17,5 +17,5 @@ func PrintTable(data [][]string, writer io.Writer) {
 		return
 	}
 
-	fmt.Fprintln(writer, str)
+	_, _ = fmt.Fprintln(writer, str)
 }

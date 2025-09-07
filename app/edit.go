@@ -13,6 +13,7 @@ import (
 )
 
 // editTags.edits the tags of the specified sessions.
+//nolint:unused
 func editTags(
 	db store.DB,
 	sessions []*models.Session,
@@ -37,7 +38,7 @@ func editTags(
 		"The sessions above will be updated. Press ENTER to proceed",
 	)
 
-	fmt.Fprint(os.Stdout, warning)
+	_, _ = fmt.Fprint(os.Stdout, warning)
 
 	reader := bufio.NewReader(os.Stdin)
 

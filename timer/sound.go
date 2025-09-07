@@ -72,24 +72,24 @@ func prepAlertSoundStream(sound string) (beep.StreamSeekCloser, error) {
 	case ".wav":
 		stream, format, err = wav.Decode(f)
 	default:
-		f.Close()
+		_ = f.Close()
 		return nil, errInvalidSoundFormat
 	}
 
 	if err != nil {
-		f.Close()
+		_ = f.Close()
 		return nil, err
 	}
 
 	err = initSpeaker(format)
 	if err != nil {
-		f.Close()
+		_ = f.Close()
 		return nil, err
 	}
 
 	err = stream.Seek(0)
 	if err != nil {
-		f.Close()
+		_ = f.Close()
 		return nil, err
 	}
 
@@ -134,24 +134,24 @@ func prepSoundStream(sound string) (beep.StreamSeekCloser, error) {
 	case ".wav":
 		stream, format, err = wav.Decode(f)
 	default:
-		f.Close()
+		_ = f.Close()
 		return nil, errInvalidSoundFormat
 	}
 
 	if err != nil {
-		f.Close()
+		_ = f.Close()
 		return nil, err
 	}
 
 	err = initSpeaker(format)
 	if err != nil {
-		f.Close()
+		_ = f.Close()
 		return nil, err
 	}
 
 	err = stream.Seek(0)
 	if err != nil {
-		f.Close()
+		_ = f.Close()
 		return nil, err
 	}
 
@@ -187,7 +187,7 @@ func (t *Timer) setAmbientSound() error {
 		if t.SoundStream != nil {
 			speaker.Clear()
 			if closer, ok := t.SoundStream.(interface{ Close() error }); ok {
-				closer.Close()
+				_ = closer.Close()
 			}
 			t.SoundStream = nil
 		}
@@ -210,7 +210,7 @@ func (t *Timer) setAmbientSound() error {
 		return err
 	}
 
-	infiniteStream := beep.Loop(-1, stream)
+	infiniteStream := beep.Loop2(stream)
 	t.SoundStream = infiniteStream
 
 	speaker.Play(t.SoundStream)

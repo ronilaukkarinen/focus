@@ -7,10 +7,12 @@ var (
 		Message: "sound file must be in mp3, ogg, flac, or wav format",
 	}
 
+	//nolint:unused
 	errInvalidInput = &apperr.Error{
 		Message: "invalid input: only comma-separated numbers are accepted",
 	}
 
+	//nolint:unused
 	errStrictMode = &apperr.Error{
 		Message: "session resumption failed: strict mode is enabled",
 	}

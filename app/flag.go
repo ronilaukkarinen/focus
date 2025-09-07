@@ -8,6 +8,7 @@ var (
 		Usage: "Start or add a new session in the past (e.g. '20 mins ago'). Must not overlap with any existing sessions",
 	}
 
+	//nolint:unused
 	noColorFlag = &cli.BoolFlag{
 		Name:  "no-color",
 		Usage: "Disable coloured output",
@@ -59,17 +60,20 @@ var (
 		Usage:   "Add comma-delimited tags to a session",
 	}
 
+	//nolint:unused
 	listJSONFlag = &cli.BoolFlag{
 		Name:  "json",
 		Usage: "List Focus sessions in JSON format",
 	}
 
+	//nolint:unused
 	statsPortFlag = &cli.UintFlag{
 		Name:  "port",
 		Usage: "Specify the port for the statistics server",
 		Value: 1111,
 	}
 
+	//nolint:unused
 	resetTimerFlag = &cli.BoolFlag{
 		Name:    "reset",
 		Aliases: []string{"r"},

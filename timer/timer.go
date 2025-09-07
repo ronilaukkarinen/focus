@@ -182,6 +182,7 @@ func New(dbClient store.DB, cfg *config.Config) (*Timer, error) {
 var playingBell bool
 
 // playSystemSound tries to play a sound using available system audio players
+//nolint:unused
 func (t *Timer) playSystemSound(soundPath string) {
 	// List of audio players to try, in order of preference
 	players := [][]string{
@@ -241,7 +242,7 @@ func (t *Timer) playFlowBell() {
 		go func() {
 			time.Sleep(5 * time.Second) // Give it time to play (tibetan bell is ~43 seconds but most of it is silence)
 			if closer, ok := stream.(interface{ Close() error }); ok {
-				closer.Close()
+				_ = closer.Close()
 			}
 		}()
 		
@@ -255,7 +256,9 @@ func (t *Timer) playFlowBell() {
 	}
 	
 	go func() {
-		defer stream.Close()
+		defer func() {
+			_ = stream.Close()
+		}()
 		
 		// Clear current playback
 		speaker.Clear()
@@ -613,6 +616,7 @@ func (t *Timer) runSessionCmd(sessionCmd string) error {
 
 // notify sends a desktop notification and plays a notification sound when a
 // session ends if enabled.
+//nolint:unused
 func (t *Timer) notify(
 	_ context.Context,
 	sessName, nextSessName config.SessionType,
@@ -662,7 +666,7 @@ func (t *Timer) notify(
 
 	<-done
 
-	stream.Close()
+	_ = stream.Close()
 
 	speaker.Clear()
 	speaker.Close()

@@ -106,6 +106,7 @@ func (t *Timer) handleTimerStartStop(
 	return t, cmd
 }
 
+//nolint:unused
 func (t *Timer) handleKeyPress(msg tea.KeyMsg) (tea.Model, tea.Cmd) {
 	var cmd tea.Cmd
 
@@ -204,7 +205,8 @@ func (t *Timer) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 				// Apply sound change
 				err := t.setAmbientSound()
 				if err != nil {
-					// Continue even if sound fails
+					// Continue even if sound fails - no action needed
+					_ = err
 				}
 				return t, nil
 			case "esc":

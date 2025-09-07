@@ -49,7 +49,9 @@ func checkForUpdates(app *cli.App) {
 		return
 	}
 
-	defer resp.Body.Close()
+	defer func() {
+		_ = resp.Body.Close()
+	}()
 
 	var version string
 

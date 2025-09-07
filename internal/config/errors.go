@@ -7,6 +7,7 @@ import (
 )
 
 var (
+	//nolint:unused
 	errSessionOverlap = &apperr.Error{
 		Message: "new sessions cannot overlap with existing ones",
 	}
@@ -15,6 +16,7 @@ var (
 		Message: "config option error",
 	}
 
+	//nolint:unused
 	errConfigValidation = &apperr.Error{
 		Message: "config validation error",
 	}
@@ -59,6 +61,7 @@ var (
 		Message: "%s duration must be between %v and %v",
 	}
 
+	//nolint:unused
 	errInvalidLongBreakInterval = &apperr.Error{
 		Message: fmt.Sprintf(
 			"long break interval must be between %d and %d sessions",

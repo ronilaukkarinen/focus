@@ -13,10 +13,12 @@ import (
 )
 
 const (
+	//nolint:unused
 	noSessionsMsg = "No sessions found for the specified time range"
 )
 
 // printSessionsTable prints a session table to the command-line.
+//nolint:unused
 func printSessionsTable(w io.Writer, sessions []*models.Session) {
 	tableBody := make([][]string, len(sessions))
 
@@ -54,6 +56,7 @@ func printSessionsTable(w io.Writer, sessions []*models.Session) {
 }
 
 // listSessions prints out a table of sessions.
+//nolint:unused
 func listSessions(sessions []*models.Session) error {
 	if len(sessions) == 0 {
 		pterm.Info.Println(noSessionsMsg)

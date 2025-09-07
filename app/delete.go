@@ -14,6 +14,7 @@ import (
 
 // delSessions deletes all the specified sessions. It requests for confirmation
 // before proceeding with the operation.
+//nolint:unused
 func delSessions(
 	db store.DB,
 	sessions []*models.Session,
@@ -34,7 +35,7 @@ func delSessions(
 		"The above sessions will be deleted permanently. Press ENTER to proceed",
 	)
 
-	fmt.Fprint(os.Stdout, warning)
+	_, _ = fmt.Fprint(os.Stdout, warning)
 
 	reader := bufio.NewReader(os.Stdin)
 

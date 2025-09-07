@@ -87,7 +87,9 @@ var (
 	appName        = "focus"
 	configFile     = "config.yml"
 	dbFile         = "focus.db"
+	//nolint:unused
 	statusFile     = "status.json"
+	//nolint:unused
 	logFile        = "focus.log"
 	dbFilePath     string
 	configFilePath string

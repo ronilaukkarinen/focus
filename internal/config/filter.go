@@ -30,6 +30,7 @@ var (
 		"please provide a valid time period",
 	)
 
+	//nolint:unused
 	errInvalidStartDate = errors.New(
 		"please provide a valid start date",
 	)
