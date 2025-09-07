@@ -197,7 +197,7 @@ func (t *Timer) setAmbientSound() error {
 	// Close existing stream but be careful with speaker operations
 	if t.SoundStream != nil {
 		if closer, ok := t.SoundStream.(interface{ Close() error }); ok {
-			closer.Close()
+			_ = closer.Close()
 		}
 		t.SoundStream = nil
 	}
