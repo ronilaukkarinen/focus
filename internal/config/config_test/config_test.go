@@ -53,6 +53,9 @@ func defaultConfig() *config.Config {
 			SoundOnBreak:      false,
 			Strict:            false,
 			TwentyFourHour:    false,
+			FlowBell:          true,
+			FlowBellSound:     "tibetan_bell",
+			FlowDefault:       true,
 		},
 		Notifications: config.NotificationConfig{
 			Enabled: true,

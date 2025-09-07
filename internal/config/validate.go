@@ -113,26 +113,47 @@ func (c *Config) validateSessionRelationships() error {
 
 // It handles both built-in and custom sounds.
 func (c *Config) validateSound(sound, group string) error {
-	if filepath.Ext(sound) == "" {
-		sound = sound + ".ogg"
-	}
-
-	ext := strings.ToLower(filepath.Ext(sound))
-	validExts := []string{".mp3", ".ogg", ".flac", ".wav"}
-
-	if !slices.Contains(validExts, ext) {
-		return errInvalidSoundFormat.Fmt(sound)
-	}
-
+	// Built-in alert sounds (embedded) don't have extensions
+	builtInAlertSounds := []string{"bell", "loud_bell", "tibetan_bell"}
+	
 	if group == "alert" {
+		// Check if it's a built-in embedded sound
+		if slices.Contains(builtInAlertSounds, sound) {
+			return nil
+		}
+		
+		// For custom alert sounds, check with .ogg extension if no extension provided
+		if filepath.Ext(sound) == "" {
+			sound = sound + ".ogg"
+		}
+		
+		ext := strings.ToLower(filepath.Ext(sound))
+		validExts := []string{".mp3", ".ogg", ".flac", ".wav"}
+		
+		if !slices.Contains(validExts, ext) {
+			return errInvalidSoundFormat.Fmt(sound)
+		}
+		
 		_, err := os.Stat(filepath.Join(AlertSoundPath(), sound))
 		if errors.Is(err, os.ErrNotExist) {
 			return errUnknownAlertSound.Fmt(sound)
 		}
-
+		
 		return nil
 	}
 
+	// For ambient sounds, add .ogg extension if no extension provided
+	if filepath.Ext(sound) == "" {
+		sound = sound + ".ogg"
+	}
+	
+	ext := strings.ToLower(filepath.Ext(sound))
+	validExts := []string{".mp3", ".ogg", ".flac", ".wav"}
+	
+	if !slices.Contains(validExts, ext) {
+		return errInvalidSoundFormat.Fmt(sound)
+	}
+	
 	_, err := os.Stat(filepath.Join(AmbientSoundPath(), sound))
 	if errors.Is(err, os.ErrNotExist) {
 		return errUnknownAmbientSound.Fmt(sound)
