@@ -8,7 +8,7 @@
    <a href="https://goreportcard.com/report/github.com/ronilaukkarinen/focus"><img src="https://goreportcard.com/badge/github.com/ronilaukkarinen/focus" alt="GoReportCard"></a>
    <a href="https://github.com/ronilaukkarinen/focus"><img src="https://img.shields.io/badge/go-1.24-blue.svg" alt="Go version"></a>
    <a href="https://github.com/ronilaukkarinen/focus/blob/master/LICENCE"><img src="https://img.shields.io/github/license/ronilaukkarinen/focus.svg" alt="LICENCE"></a>
-   <a href="https://github.com/ronilaukkarinen/focus/releases/"><img src="https://img.shields.io/badge/version-1.5.0-blue.svg" alt="Latest release"></a>
+   <a href="https://github.com/ronilaukkarinen/focus/releases/"><img src="https://img.shields.io/badge/version-1.5.1-blue.svg" alt="Latest release"></a>
 </p>
 
 <h1 align="center">Focus on your task - with flow timer!</h1>
@@ -62,7 +62,7 @@ Focus is written in Go, so you can install it through `go install` (requires Go
 1.16 or later):
 
 ```bash
-go install github.com/ayoisaiah/focus/cmd/focus@latest
+go install github.com/ronilaukkarinen/focus/cmd/focus@latest
 ```
 
 ### 🛠️ Installing from Source
@@ -124,21 +124,13 @@ sudo apt install libasound2-dev
 ### 📦 NPM Package
 
 You can also install Focus through its
-[NPM package](https://www.npmjs.com/package/@ayoisaiah/focus):
+prebuilt binaries from the [releases page](https://github.com/ronilaukkarinen/focus/releases).
 
-With `npm`:
+### 📦 Package Managers
 
-```bash
-npm i @ayoisaiah/focus -g
-```
+Once released, this fork will be available through various package managers. For now, use the installation from source method above.
 
-With `yarn`:
-
-```bash
-yarn global add @ayoisaiah/focus
-```
-
-Other installation methods are
+Other installation methods for the original version are
 [available here](https://github.com/ayoisaiah/focus/wiki/Installation/).
 
 ## 🚀 Usage
@@ -381,7 +373,7 @@ focus stats -p 'all-time'
 You can also set a specific time period using the `--start` and `--end` options.
 The latter defaults to the current day if not specified. See the list of
 acceptable formats in the
-[project wiki](https://github.com/ayoisaiah/focus/wiki/Acceptable-datetime-formats-for-filtering).
+[original project wiki](https://github.com/ayoisaiah/focus/wiki/Acceptable-datetime-formats-for-filtering).
 
 ```bash
 focus stats --start '2021-08-06'

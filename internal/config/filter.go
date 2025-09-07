@@ -114,7 +114,8 @@ func setFilterConfig(ctx *cli.Context) (*FilterConfig, error) {
 	}
 
 	if filterCfg.StartTime.IsZero() {
-		return nil, errInvalidStartDate
+		// Default to 7 days if no period or start date is provided
+		filterCfg.StartTime, filterCfg.EndTime = getTimeRange(timeutil.Period7Days)
 	}
 
 	if int(filterCfg.EndTime.Sub(filterCfg.StartTime).Seconds()) < 0 {

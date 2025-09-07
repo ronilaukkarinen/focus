@@ -2,7 +2,7 @@ name: Release Focus
 
 env:
   dev_tag: nightly
-  go_version: 1.21
+  go_version: 1.24
   REPO_OWNER: ${{ vars.REPO_OWNER }}
   REPO_WEBSITE: ${{ vars.REPO_WEBSITE }}
   REPO_DESCRIPTION: ${{ vars.REPO_DESCRIPTION }}

@@ -1,3 +1,10 @@
+## 1.5.1 (2025-09-07)
+
+Bug fixes:
+
+- Fix stats command to default to 7 days when no time period is specified instead of showing error
+- Update installation instructions to point to ronilaukkarinen/focus fork instead of original repository
+
 ## 1.5.0 (2025-09-07)
 
 Features and enhancements:
