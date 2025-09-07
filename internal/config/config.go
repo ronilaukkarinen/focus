@@ -75,7 +75,7 @@ type (
 	SessionType string
 )
 
-const Version = "v1.4.2"
+const Version = "v1.5.0"
 
 const (
 	Work       SessionType = "Work session"

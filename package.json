@@ -1,10 +1,10 @@
 {
-  "name": "@ayoisaiah/focus",
-  "version": "1.4.3",
-  "description": "Focus is a command-line productivity timer based on the Pomodoro Technique",
+  "name": "@ronilaukkarinen/focus",
+  "version": "1.5.0",
+  "description": "Focus is a flexible command-line productivity timer with flow mode for uninterrupted work sessions",
   "main": "",
-  "repository": "https://github.com/ayoisaiah/focus",
-  "author": "Ayooluwa Isaiah <ayo@freshman.tech>",
+  "repository": "https://github.com/ronilaukkarinen/focus",
+  "author": "Roni Laukkarinen (original by Ayooluwa Isaiah)",
   "license": "MIT",
   "dependencies": {
     "@ayoisaiah/go-npm": "^0.1.13",
@@ -20,7 +20,7 @@
   "goBinary": {
     "name": "focus",
     "path": "./bin",
-    "url": "https://github.com/ayoisaiah/focus/releases/download/v{{version}}/focus_{{version}}_{{platform}}_{{arch}}.tar.gz"
+    "url": "https://github.com/ronilaukkarinen/focus/releases/download/v{{version}}/focus_{{version}}_{{platform}}_{{arch}}.tar.gz"
   },
   "private": false
 }

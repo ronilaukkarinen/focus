@@ -88,7 +88,7 @@ func setupViper(v *viper.Viper, c *Config) {
 	v.SetDefault(keyStrict, false)
 	v.SetDefault(keyFlowBell, true)
 	v.SetDefault(keyFlowBellSound, "tibetan_bell")
-	v.SetDefault(keyFlowDefault, false)
+	v.SetDefault(keyFlowDefault, true)
 	v.SetDefault(keyAmbientSound, "")
 	v.SetDefault(keySessionCmd, "")
 

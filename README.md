@@ -4,19 +4,21 @@
 
 <p align="center">
    <a href="http://makeapullrequest.com"><img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat" alt=""></a>
-   <a href="https://github.com/ayoisaiah/focus/actions"><img src="https://github.com/ayoisaiah/focus/actions/workflows/test.yml/badge.svg" alt="Github Actions"></a>
    <a href="https://golang.org"><img src="https://img.shields.io/badge/Made%20with-Go-1f425f.svg" alt="made-with-Go"></a>
-   <a href="https://goreportcard.com/report/github.com/ayoisaiah/focus"><img src="https://goreportcard.com/badge/github.com/ayoisaiah/focus" alt="GoReportCard"></a>
-   <a href="https://github.com/ayoisaiah/focus"><img src="https://img.shields.io/github/go-mod/go-version/ayoisaiah/focus.svg" alt="Go.mod version"></a>
-   <a href="https://github.com/ayoisaiah/focus/blob/master/LICENCE"><img src="https://img.shields.io/github/license/ayoisaiah/focus.svg" alt="LICENCE"></a>
-   <a href="https://github.com/ayoisaiah/focus/releases/"><img src="https://img.shields.io/github/release/ayoisaiah/focus.svg" alt="Latest release"></a>
+   <a href="https://goreportcard.com/report/github.com/ronilaukkarinen/focus"><img src="https://goreportcard.com/badge/github.com/ronilaukkarinen/focus" alt="GoReportCard"></a>
+   <a href="https://github.com/ronilaukkarinen/focus"><img src="https://img.shields.io/badge/go-1.24-blue.svg" alt="Go version"></a>
+   <a href="https://github.com/ronilaukkarinen/focus/blob/master/LICENCE"><img src="https://img.shields.io/github/license/ronilaukkarinen/focus.svg" alt="LICENCE"></a>
+   <a href="https://github.com/ronilaukkarinen/focus/releases/"><img src="https://img.shields.io/badge/version-1.5.0-blue.svg" alt="Latest release"></a>
 </p>
 
-<h1 align="center">Focus on your task</h1>
+<h1 align="center">Focus on your task - with flow timer!</h1>
 
-Focus is a cross-platform productivity timer for the command line. It is based
-on the [Pomodoro Technique](https://en.wikipedia.org/wiki/Pomodoro_Technique), a
-time management method developed by Francesco Cirillo in the late 1980s.
+> **🚀 Flow Timer Fork** 
+> This is a fork of [ayoisaiah/focus](https://github.com/ayoisaiah/focus) that emphasizes **flow timer mode** - a flexible count-up timer that lets you work without the pressure of fixed time boxes. While retaining all the original Pomodoro features, this fork defaults to flow mode and includes enhanced task tracking, milestone notifications, and improved visual feedback.
+
+Focus is a cross-platform productivity timer for the command line. Originally based
+on the [Pomodoro Technique](https://en.wikipedia.org/wiki/Pomodoro_Technique), this fork
+primarily uses **flow timer mode** for a more flexible approach to time tracking.
 
 ## 🍅 How it works
 
@@ -187,7 +189,7 @@ flow_bell: true # play bell sounds at flow timer milestones (50% and 100%)
 
 flow_bell_sound: 'tibetan_bell' # sound file for flow timer bells (bell, loud_bell, tibetan_bell)
 
-flow_default: false # use flow timer mode by default (can still be overridden with --flow flag)
+flow_default: true # use flow timer mode by default (set to false for traditional pomodoro)
 
 session_cmd: '' # execute an arbitrary command after each session
 ```

@@ -25,14 +25,18 @@ func Get() *cli.App {
 		Name: "focus",
 		Authors: []*cli.Author{
 			{
-				Name:  "Ayooluwa Isaiah",
+				Name:  "Roni Laukkarinen",
+				Email: "roni@ronilaukkarinen.com",
+			},
+			{
+				Name:  "Ayooluwa Isaiah (original)",
 				Email: "ayo@freshman.tech",
 			},
 		},
 		Usage: `
-		Focus is a cross-platform productivity timer for the command-line. It is 
-		based on the Pomodoro Technique, a time management method developed by 
-		Francesco Cirillo in the late 1980s.`,
+		Focus is a cross-platform productivity timer for the command-line. This fork
+		emphasizes flow timer mode for flexible, uninterrupted work sessions while
+		retaining support for the traditional Pomodoro Technique.`,
 		UsageText:            "[COMMAND] [OPTIONS]",
 		Version:              config.Version,
 		EnableBashCompletion: true,
