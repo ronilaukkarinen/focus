@@ -55,15 +55,40 @@ func (t *Timer) timerView() string {
 	var s strings.Builder
 
 	if t.flowMode {
-		// Flow mode display
+		// Flow mode display with task name and "until" time
 		if t.taskName != "" {
+			// Session message in dimmed color
 			s.WriteString(
 				lipgloss.NewStyle().
-					Foreground(lipgloss.Color(t.Opts.Work.Color)).
-					MarginRight(1).
+					Foreground(lipgloss.Color("#666666")). // Dimmed gray
+					SetString(t.Opts.Work.Message + " ").
+					String(),
+			)
+			
+			// Task name in neon green
+			s.WriteString(
+				lipgloss.NewStyle().
+					Foreground(lipgloss.Color("#B0DB43")). // Neon green
 					SetString(t.taskName).
 					String(),
 			)
+			
+			// "until" time in dimmed color
+			var timeFormat string
+			if t.Opts.Settings.TwentyFourHour {
+				timeFormat = "15:04:05"
+			} else {
+				timeFormat = "03:04:05 PM"
+			}
+			
+			s.WriteString(" ")
+			s.WriteString(
+				lipgloss.NewStyle().
+					Foreground(lipgloss.Color("#666666")). // Dimmed gray
+					SetString("until " + t.Current.EndTime.Format(timeFormat)).
+					String(),
+			)
+			
 			s.WriteString("\n")
 		}
 		

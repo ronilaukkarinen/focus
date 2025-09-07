@@ -15,7 +15,9 @@ Features and enhancements:
 - Flow mode integrates with existing notification settings and work sound configuration.
 - Prevent keyboard shortcuts from interfering with form input during prompts.
 - Fix the code to support flat config.yml structure
-- Add `flow_default` configuration option
+- Add `flow_default` configuration option to set flow timer mode as default
+- Enhanced flow timer display: dimmed "Focus on your task" message with task name in neon green and "until" time
+- Remove 📝 emoji from task name display in flow mode
 
 Bug fixes:
 
