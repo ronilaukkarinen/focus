@@ -44,6 +44,12 @@ primarily uses **flow timer mode** for a more flexible approach to time tracking
 
 ## 💻 Screenshots
 
+<img width="675" height="426" alt="Screenshot from 2025-09-07 10-04-38" src="https://github.com/user-attachments/assets/65a1515b-40cb-4d38-ae45-91baf3ddf30e" />
+
+<img width="675" height="426" alt="Screenshot from 2025-09-07 10-06-22" src="https://github.com/user-attachments/assets/799730a4-4e14-4057-81ae-b42fe298440c" />
+
+<img width="675" height="684" alt="Screenshot from 2025-09-07 10-06-36" src="https://github.com/user-attachments/assets/6ffce6c2-5940-4f73-9eee-b6b0cbf538b4" />
+
 ![Focus first run](https://ik.imagekit.io/turnupdev/focus-screenshot_6BU22Sj-J.png)
 
 ![Focus statistics](https://ik.imagekit.io/turnupdev/focus-stats-screenshot_0dLtjklu_0.png)
@@ -158,39 +164,22 @@ Here's the default configuration settings:
 
 ```yml
 work_mins: 25 # work session length
-
 work_msg: Focus on your task # work session message (shown in terminal and notification)
-
 short_break_mins: 5 # short break session length
-
 short_break_msg: Take a breather # short break session message (shown in terminal and notification)
-
 long_break_mins: 15 # long break session length
-
 long_break_msg: Take a long break # long break session message (shown in terminal and notification)
-
 long_break_interval: 4 # number of sessions before long break
-
 notify: true # show desktop notifications
-
 auto_start_work: false # Automatically start the next work session
-
 auto_start_break: true # Automatically start the next break session
-
 24hr_clock: false # Show time in 24 hour format
-
 sound: '' # name of ambient sound to play
-
 sound_on_break: false # play ambient sound during break sessions
-
 dark_theme: true # use colours befitting a dark background
-
 flow_bell: true # play bell sounds at flow timer milestones (50% and 100%)
-
 flow_bell_sound: 'tibetan_bell' # sound file for flow timer bells (bell, loud_bell, tibetan_bell)
-
 flow_default: true # use flow timer mode by default (set to false for traditional pomodoro)
-
 session_cmd: '' # execute an arbitrary command after each session
 ```
 
