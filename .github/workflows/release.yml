@@ -118,8 +118,8 @@ jobs:
       - name: Create stable release
         uses: softprops/action-gh-release@v1
         with:
-          tag_name: ${{ github.ref }}
-          name: ${{ github.ref }}
+          tag_name: ${{ github.ref_name }}
+          name: ${{ github.ref_name }}
           body: ${{ env.CHANGELOG }}
           draft: false
           prerelease: false
