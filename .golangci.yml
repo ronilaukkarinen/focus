@@ -2,6 +2,11 @@ version: "2"
 run:
   issues-exit-code: 1
   allow-parallel-runners: true
+  build-tags:
+    - nosound
+  skip-dirs:
+    - vendor
+    - third_party
 linters:
   default: none
   enable:
@@ -42,73 +47,52 @@ linters:
     - unparam
     - unused
     - whitespace
-    - wsl
-  settings:
-    decorder:
-      disable-dec-num-check: true
-      disable-dec-order-check: false
-    errcheck:
-      check-type-assertions: true
-    goconst:
-      min-len: 2
-      min-occurrences: 3
-    gocritic:
-      enabled-tags:
-        - diagnostic
-        - performance
-        - style
-    govet:
-      enable:
-        - fieldalignment
-    mnd:
-      checks:
-        - argument
-        - case
-        - condition
-        - return
-    nolintlint:
-      require-explanation: true
-      require-specific: true
-    revive:
-      rules:
-        - name: error-naming
-          severity: warning
-          disabled: true
-  exclusions:
-    generated: lax
-    presets:
-      - comments
-      - common-false-positives
-      - legacy
-      - std-error-handling
+    - wsl_v5
+settings:
+  decorder:
+    disable-dec-num-check: true
+    disable-dec-order-check: false
+  errcheck:
+    check-type-assertions: true
+  goconst:
+    min-len: 2
+    min-occurrences: 3
+  gocritic:
+    enabled-tags:
+      - diagnostic
+      - performance
+      - style
+  govet:
+    enable:
+      - fieldalignment
+  mnd:
+    checks:
+      - argument
+      - case
+      - condition
+      - return
+  nolintlint:
+    require-explanation: true
+    require-specific: true
+  revive:
     rules:
-      - linters:
-          - dupl
-          - gocyclo
-          - gosec
-        path: _test\.go
-      - linters:
-          - staticcheck
-        text: error strings should not be capitalized
-    paths:
-      - third_party$
-      - builtin$
-      - examples$
+      - name: error-naming
+        severity: warning
+        disabled: true
+  wsl_v5:
+    allow-first-in-block: true
+    allow-whole-block: false
+    branch-max-lines: 2
 issues:
   max-issues-per-linter: 0
   max-same-issues: 0
   fix: true
-formatters:
-  enable:
-    - gofmt
-    - goimports
-  settings:
-    goimports:
-      local-prefixes:
-        - github.com/ayoisaiah/focus
-  exclusions:
-    generated: lax
-    paths:
-      - third_party$
-      - builtin$
-      - examples$
+  exclude-rules:
+    - linters:
+        - dupl
+        - gocyclo
+        - gosec
+      path: _test\.go
+    - linters:
+        - staticcheck
+      text: error strings should not be capitalized

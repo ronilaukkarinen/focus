@@ -20,6 +20,9 @@ jobs:
         with:
           go-version: ${{ vars.GO_VERSION }}
 
+      - name: Install libasound2-dev
+        run: sudo apt install -y libasound2-dev
+
       - name: golangci-lint
         uses: golangci/golangci-lint-action@v7
         with:
