@@ -160,27 +160,54 @@ file which will be located in `~/.config/focus/` on Linux,
 `%LOCALAPPDATA%\focus` on Windows, and `~/Library/Application Support/focus` on
 macOS.
 
+This fork defaults to **flow timer mode** with enhanced features including task
+tracking, milestone bells, and flexible session timing. You can switch back to
+traditional Pomodoro mode by setting `flow_default: false` in your config.
+
 Here's the default configuration settings:
 
 ```yml
-work_mins: 25 # work session length
+# Work session settings
+work_duration: 25m # work session length
 work_msg: Focus on your task # work session message (shown in terminal and notification)
-short_break_mins: 5 # short break session length
+work_sound: loud_bell # sound to play when work session ends
+work_color: '#B0DB43' # color for work session display
+
+# Short break settings
+short_break_duration: 5m # short break session length
 short_break_msg: Take a breather # short break session message (shown in terminal and notification)
-long_break_mins: 15 # long break session length
+break_sound: bell # sound to play when break session ends
+short_break_color: '#12EAEA' # color for short break display
+
+# Long break settings
+long_break_duration: 15m # long break session length
 long_break_msg: Take a long break # long break session message (shown in terminal and notification)
+long_break_color: '#C492B1' # color for long break display
 long_break_interval: 4 # number of sessions before long break
+
+# Notification settings
 notify: true # show desktop notifications
+
+# Automation settings
 auto_start_work: false # Automatically start the next work session
 auto_start_break: true # Automatically start the next break session
+
+# Display settings
 24hr_clock: false # Show time in 24 hour format
-sound: '' # name of ambient sound to play
-sound_on_break: false # play ambient sound during break sessions
 dark_theme: true # use colours befitting a dark background
+
+# Sound settings
+sound: '' # name of ambient sound to play during sessions
+sound_on_break: false # play ambient sound during break sessions
+
+# Flow timer settings
+flow_default: true # use flow timer mode by default (set to false for traditional pomodoro)
 flow_bell: true # play bell sounds at flow timer milestones (50% and 100%)
 flow_bell_sound: 'tibetan_bell' # sound file for flow timer bells (bell, loud_bell, tibetan_bell)
-flow_default: true # use flow timer mode by default (set to false for traditional pomodoro)
+
+# Other settings
 session_cmd: '' # execute an arbitrary command after each session
+strict: false # when enabled, you can't resume a paused session
 ```
 
 If you specify a command-line argument while running focus, it will override the
