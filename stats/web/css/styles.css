@@ -62,13 +62,20 @@ img {
 
 @font-face {
   font-family: 'Inter';
-  src: url('../fonts/Inter-Bold.woff') format('woff');
-  font-weight: bold;
+  src: url('../fonts/Inter-Regular.woff') format('woff');
+  font-weight: 400;
 }
 
 @font-face {
   font-family: 'Inter';
-  src: url('../fonts/Inter-Regular.woff') format('woff');
+  src: url('../fonts/Inter-SemiBold.woff') format('woff');
+  font-weight: 600;
+}
+
+@font-face {
+  font-family: 'Inter';
+  src: url('../fonts/Inter-Bold.woff') format('woff');
+  font-weight: 700;
 }
 
 body {
@@ -158,7 +165,7 @@ input[type='date'],
 
 .summary-num {
   font-size: 1.5rem;
-  font-weight: bold;
+  font-weight: 600;
 }
 
 .columns {
@@ -178,7 +185,7 @@ input[type='date'],
 }
 .chart-title {
   font-size: 1.2rem;
-  font-weight: bold;
+  font-weight: 600;
   margin-bottom: 20px;
 }
 

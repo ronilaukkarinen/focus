@@ -5,10 +5,22 @@
 - Fix stats page showing empty data - JavaScript bundle was missing and needed to be built with esbuild
 - Fix spacing issue in stats page navigation by adding proper left padding to main navigation
 - Fix datepicker input styling to match theme with proper colors and calendar icon visibility in dark mode
+- Fix 'c' completion hotkey not properly saving completed sessions to stats database
+- Add Inter SemiBold (600) font file to properly support semibold typography in stats page
+- Fix completion view looping issue and timer continuing to run after task completion
+- Remove terminal confetti animation that was causing display issues  
+- Fix timer tick handler still updating elapsed time during celebration view
 
 ### Added
 - Add dark mode support to stats page - automatically follows system preferences
 - Charts now properly render in dark mode with appropriate themes
+- Add 'c' hotkey to complete flow mode sessions manually - marks session as completed instead of abandoned
+- Add HTTP confetti trigger support for external celebration effects (disabled by default)
+- Add `confetti_enabled` config option for enabling external confetti via raycast-confetti-server
+- Add next task prompt after completion - press Enter to start new task or q to quit instead of automatically exiting
+
+### Changed
+- Use semibold (font-weight: 600) instead of bold for better typography in stats page
 
 ## 1.5.2 (2025-09-07)
 

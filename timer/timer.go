@@ -9,6 +9,7 @@ import (
 	"errors"
 	"fmt"
 	"io/fs"
+	"net/http"
 	"os"
 	"os/exec"
 	"path/filepath"
@@ -69,6 +70,8 @@ type (
 		pausedDuration     time.Duration
 		halfwayBellPlayed  bool
 		completeBellPlayed bool
+		celebratingCompletion bool
+		confettiStep      int
 		// Custom sound selection (replacing huh form)
 		soundOptions       []string
 		selectedSoundIndex int
@@ -81,6 +84,7 @@ type (
 		enter      key.Binding
 		quit       key.Binding
 		esc        key.Binding
+		complete   key.Binding
 	}
 
 	style struct {
@@ -122,6 +126,10 @@ var (
 		esc: key.NewBinding(
 			key.WithKeys("esc"),
 			key.WithHelp("esc", "skip"),
+		),
+		complete: key.NewBinding(
+			key.WithKeys("c"),
+			key.WithHelp("c", "complete"),
 		),
 	}
 )
@@ -670,6 +678,21 @@ func (t *Timer) notify(
 
 	speaker.Clear()
 	speaker.Close()
+}
+
+// triggerExternalConfetti sends HTTP request to trigger confetti if enabled
+func (t *Timer) triggerExternalConfetti() {
+	if !t.Opts.Settings.ConfettiEnabled {
+		return
+	}
+	
+	go func() {
+		client := &http.Client{Timeout: 2 * time.Second}
+		resp, err := client.Post("http://localhost:3019/trigger-confetti", "application/json", nil)
+		if err == nil && resp != nil {
+			resp.Body.Close()
+		}
+	}()
 }
 
 // ReportStatus reports the status of the currently running timer.

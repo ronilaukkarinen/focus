@@ -34,6 +34,7 @@ const (
 	keyFlowBell             = "flow_bell"
 	keyFlowBellSound        = "flow_bell_sound"
 	keyFlowDefault          = "flow_default"
+	keyConfettiEnabled      = "confetti_enabled"
 	keyDarkTheme            = "dark_theme"
 )
 
@@ -89,6 +90,7 @@ func setupViper(v *viper.Viper, c *Config) {
 	v.SetDefault(keyFlowBell, true)
 	v.SetDefault(keyFlowBellSound, "tibetan_bell")
 	v.SetDefault(keyFlowDefault, true)
+	v.SetDefault(keyConfettiEnabled, false)
 	v.SetDefault(keyAmbientSound, "")
 	v.SetDefault(keySessionCmd, "")
 
@@ -142,6 +144,7 @@ func loadViperConfig(v *viper.Viper, c *Config) error {
 	c.Settings.FlowBell = v.GetBool(keyFlowBell)
 	c.Settings.FlowBellSound = v.GetString(keyFlowBellSound)
 	c.Settings.FlowDefault = v.GetBool(keyFlowDefault)
+	c.Settings.ConfettiEnabled = v.GetBool(keyConfettiEnabled)
 	
 	c.Notifications.Enabled = v.GetBool(keyNotificationsEnabled)
 	c.Display.DarkTheme = v.GetBool(keyDarkTheme)

@@ -13,12 +13,18 @@ import (
 	"github.com/gopxl/beep/v2/speaker"
 
 	"github.com/ayoisaiah/focus/internal/config"
+	"github.com/ayoisaiah/focus/internal/models"
 )
 
 // handleTimerTick processes timer tick events.
 func (t *Timer) handleTimerTick(msg btimer.TickMsg) (tea.Model, tea.Cmd) {
 	var cmd tea.Cmd
 	t.clock, cmd = t.clock.Update(msg)
+
+	// Skip tick handling during celebration
+	if t.celebratingCompletion {
+		return t, cmd
+	}
 
 	// In flow mode, track elapsed time and play bells
 	if t.flowMode && t.clock.Running() {
@@ -176,6 +182,29 @@ func (t *Timer) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		return t, cmd
 
 	case tea.KeyMsg:
+		// Handle celebration completion screen
+		if t.celebratingCompletion {
+			switch msg.String() {
+			case "enter":
+				// Reset for new task
+				t.celebratingCompletion = false
+				t.taskName = ""
+				t.estimatedTime = 0
+				t.estimatedTimeStr = ""
+				t.elapsedTime = 0
+				t.pausedDuration = 0
+				t.halfwayBellPlayed = false
+				t.completeBellPlayed = false
+				
+				// Return to flow mode prompt for next task
+				cmd := t.promptFlowModeInfo()
+				return t, cmd
+			case "q", "ctrl+c":
+				return t, tea.Batch(tea.ClearScreen, tea.Quit)
+			}
+			return t, nil
+		}
+		
 		// Handle custom sound menu navigation
 		if t.showingSoundMenu {
 			switch msg.String() {
@@ -298,6 +327,41 @@ func (t *Timer) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 			cmd = t.clock.Toggle()
 
 			return t, cmd
+
+		case key.Matches(msg, defaultKeymap.complete):
+			// Only allow complete in flow mode
+			if t.flowMode {
+				// Stop the timer to freeze elapsed time
+				t.clock.Stop()
+				
+				// Manually mark as completed and persist with special handling
+				sess := *t.Current
+				if sess.Name == config.Work {
+					sess.UpdateEndTime(true) // Force completion to true
+					sess.Normalise()
+					
+					sessModel := sess.ToDBModel()
+					m := map[time.Time]*models.Session{
+						sess.StartTime: sessModel,
+					}
+					
+					_ = t.db.UpdateSessions(m)
+				}
+				
+				// Trigger external confetti if enabled
+				t.triggerExternalConfetti()
+				
+				// Play completion bell if configured
+				if t.Opts.Settings.FlowBell {
+					go func() {
+						t.playSystemSound(t.Opts.Settings.FlowBellSound)
+					}()
+				}
+				
+				// Show celebration instead of quitting
+				t.celebratingCompletion = true
+				return t, nil
+			}
 
 		case key.Matches(msg, defaultKeymap.quit):
 			_ = t.persist()

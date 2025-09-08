@@ -47,6 +47,7 @@ type (
 		FlowBell          bool   `mapstructure:"flow_bell"`
 		FlowBellSound     string `mapstructure:"flow_bell_sound"`
 		FlowDefault       bool   `mapstructure:"flow_default"`
+		ConfettiEnabled   bool   `mapstructure:"confetti_enabled"`
 	}
 
 	// arguments.

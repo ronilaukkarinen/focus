@@ -29,6 +29,50 @@ func (t *Timer) formatTimeRemaining() string {
 	)
 }
 
+func (t *Timer) completionCelebrationView() string {
+	var s strings.Builder
+	
+	// Celebration message
+	celebrationStyle := lipgloss.NewStyle().
+		Bold(true).
+		Foreground(lipgloss.Color("#39FF14")).
+		Align(lipgloss.Center)
+	
+	taskCompleteStyle := lipgloss.NewStyle().
+		Bold(true).
+		Foreground(lipgloss.Color("#FFD700")).
+		Align(lipgloss.Center)
+	
+	s.WriteString(celebrationStyle.Render("🎉 TASK COMPLETED! 🎉"))
+	s.WriteString("\n\n")
+	
+	if t.taskName != "" {
+		s.WriteString(taskCompleteStyle.Render(fmt.Sprintf("Finished: %s", t.taskName)))
+		s.WriteString("\n")
+	}
+	
+	timeStyle := lipgloss.NewStyle().
+		Foreground(lipgloss.Color("#96CEB4")).
+		Align(lipgloss.Center)
+	
+	// Calculate final elapsed time (frozen at completion)
+	elapsedMinutes := int(t.elapsedTime.Minutes())
+	elapsedSeconds := int(t.elapsedTime.Seconds()) % 60
+	elapsedStr := fmt.Sprintf("%02d:%02d", elapsedMinutes, elapsedSeconds)
+	
+	s.WriteString(timeStyle.Render(fmt.Sprintf("Time focused: %s", elapsedStr)))
+	s.WriteString("\n\n")
+	
+	// Instructions
+	instructionStyle := lipgloss.NewStyle().
+		Foreground(lipgloss.Color("#666666")).
+		Align(lipgloss.Center)
+	
+	s.WriteString(instructionStyle.Render("Press Enter to start a new task, or q to quit"))
+	
+	return s.String()
+}
+
 func (t *Timer) sessionPromptView() string {
 	var s strings.Builder
 
@@ -299,6 +343,11 @@ func (t *Timer) customHelpView() string {
 		parts = append(parts, dimStyle.Render("s sound"))
 	}
 	
+	// Complete button - only show in flow mode
+	if t.flowMode {
+		parts = append(parts, dimStyle.Render("c complete"))
+	}
+	
 	// Quit button - always dim
 	parts = append(parts, dimStyle.Render("q quit"))
 	
@@ -306,6 +355,11 @@ func (t *Timer) customHelpView() string {
 }
 
 func (t *Timer) View() string {
+	// Handle completion celebration
+	if t.celebratingCompletion {
+		return defaultStyle.base.Render(t.completionCelebrationView())
+	}
+	
 	// Handle flow mode prompt
 	if t.settings == "flowPrompt" && t.soundForm != nil {
 		return defaultStyle.base.Render(t.soundForm.View())
