@@ -208,9 +208,9 @@ func (t *Timer) playSystemSound(soundPath string) {
 				continue
 			}
 			
-			// Try to play the sound
+			// Try to play the sound and wait for completion
 			execCmd := exec.Command(cmd[0], cmd[1:]...)
-			err := execCmd.Run()
+			err := execCmd.Run() // This waits for the command to complete
 			if err != nil {
 				continue
 			}
@@ -246,9 +246,9 @@ func (t *Timer) playFlowBell() {
 		// Play the bell at normal volume
 		speaker.Play(stream)
 		
-		// Close stream after a reasonable delay in a goroutine
+		// Close stream after the full bell duration
 		go func() {
-			time.Sleep(5 * time.Second) // Give it time to play (tibetan bell is ~43 seconds but most of it is silence)
+			time.Sleep(15 * time.Second) // Give it time to play full singing bowl (14 seconds + buffer)
 			if closer, ok := stream.(interface{ Close() error }); ok {
 				_ = closer.Close()
 			}

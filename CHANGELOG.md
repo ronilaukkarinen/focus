@@ -1,4 +1,4 @@
-## [Unreleased]
+## 1.6.0 (2025-09-08)
 
 ### Fixed
 - Fix stats command not accepting port flag - added missing flag registration to stats command
@@ -21,6 +21,10 @@
 
 ### Changed
 - Use semibold (font-weight: 600) instead of bold for better typography in stats page
+- Replace tibetan_bell sound with new 14-second singing bowl audio for better flow timer experience
+- Improve bell sound playback timing to ensure full sound duration is played at 50% and 100% milestones
+- Simplify completion celebration view by removing "TASK COMPLETED!" text and adding tada emoji before "Finished"
+- Improve task name wrapping in completion view for narrow terminals
 
 ## 1.5.2 (2025-09-07)
 

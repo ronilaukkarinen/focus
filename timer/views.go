@@ -32,23 +32,22 @@ func (t *Timer) formatTimeRemaining() string {
 func (t *Timer) completionCelebrationView() string {
 	var s strings.Builder
 	
-	// Celebration message
-	celebrationStyle := lipgloss.NewStyle().
-		Bold(true).
-		Foreground(lipgloss.Color("#39FF14")).
-		Align(lipgloss.Center)
+	// Calculate responsive width (default to 60, but can be smaller)
+	maxWidth := 60
+	if t.progress.Width > 0 && t.progress.Width < maxWidth {
+		maxWidth = t.progress.Width
+	}
 	
 	taskCompleteStyle := lipgloss.NewStyle().
 		Bold(true).
 		Foreground(lipgloss.Color("#FFD700")).
-		Align(lipgloss.Center)
-	
-	s.WriteString(celebrationStyle.Render("🎉 TASK COMPLETED! 🎉"))
-	s.WriteString("\n\n")
+		Align(lipgloss.Center).
+		Width(maxWidth)
 	
 	if t.taskName != "" {
-		s.WriteString(taskCompleteStyle.Render(fmt.Sprintf("Finished: %s", t.taskName)))
-		s.WriteString("\n")
+		taskText := fmt.Sprintf("🎉 Finished: %s", t.taskName)
+		s.WriteString(taskCompleteStyle.Render(taskText))
+		s.WriteString("\n\n")
 	}
 	
 	timeStyle := lipgloss.NewStyle().
