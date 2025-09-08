@@ -56,6 +56,7 @@ func defaultConfig() *config.Config {
 			FlowBell:          true,
 			FlowBellSound:     "tibetan_bell",
 			FlowDefault:       true,
+			ConfettiEnabled:   false,
 		},
 		Notifications: config.NotificationConfig{
 			Enabled: true,

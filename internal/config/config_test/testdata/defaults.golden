@@ -1,6 +1,7 @@
 auto_start_break: true
 auto_start_work: false
 break_sound: bell
+confetti_enabled: false
 dark_theme: true
 flow_bell: true
 flow_bell_sound: tibetan_bell
