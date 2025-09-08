@@ -321,6 +321,12 @@ func (t *Timer) notifyFlowMilestone(milestone string) {
 
 // promptFlowModeInfo prompts for task name and estimated time in flow mode.
 func (t *Timer) promptFlowModeInfo() tea.Cmd {
+	// Calculate form width based on terminal size
+	formWidth := 60
+	if t.progress.Width > 0 && t.progress.Width < formWidth {
+		formWidth = t.progress.Width
+	}
+	
 	// Create a form to get task name and estimated time
 	t.soundForm = huh.NewForm(
 		huh.NewGroup(
@@ -328,14 +334,15 @@ func (t *Timer) promptFlowModeInfo() tea.Cmd {
 				Key("taskName").
 				Title("What are you working on?").
 				Value(&t.taskName).
-				Placeholder("Enter task name..."),
+				Placeholder("Enter task name...").
+				CharLimit(200), // Allow longer task names
 			huh.NewInput().
 				Key("estimatedTime").
 				Title("Estimated time (e.g., 25m, 1h30m)?").
 				Value(&t.estimatedTimeStr).
 				Placeholder("25m"),
 		),
-	)
+	).WithWidth(formWidth)
 	t.settings = "flowPrompt"
 	return t.soundForm.Init()
 }

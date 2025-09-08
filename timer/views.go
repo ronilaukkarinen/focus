@@ -100,21 +100,14 @@ func (t *Timer) timerView() string {
 	if t.flowMode {
 		// Flow mode display with task name and "until" time
 		if t.taskName != "" {
-			// Session message in dimmed color
-			s.WriteString(
-				lipgloss.NewStyle().
-					Foreground(lipgloss.Color("#666666")). // Dimmed gray
-					SetString(t.Opts.Work.Message + " ").
-					String(),
-			)
+			// Calculate available width for task display (similar to completion view)
+			maxWidth := 60
+			if t.progress.Width > 0 && t.progress.Width < maxWidth {
+				maxWidth = t.progress.Width
+			}
 			
-			// Task name in neon green
-			s.WriteString(
-				lipgloss.NewStyle().
-					Foreground(lipgloss.Color("#B0DB43")). // Neon green
-					SetString(t.taskName).
-					String(),
-			)
+			// Session message in dimmed color
+			sessionMsg := t.Opts.Work.Message + " "
 			
 			// "until" time in dimmed color
 			var timeFormat string
@@ -123,14 +116,66 @@ func (t *Timer) timerView() string {
 			} else {
 				timeFormat = "03:04:05 PM"
 			}
+			untilTime := " until " + t.Current.EndTime.Format(timeFormat)
 			
-			s.WriteString(" ")
-			s.WriteString(
-				lipgloss.NewStyle().
-					Foreground(lipgloss.Color("#666666")). // Dimmed gray
-					SetString("until " + t.Current.EndTime.Format(timeFormat)).
-					String(),
-			)
+			// Calculate available space for task name
+			availableWidth := maxWidth - len(sessionMsg) - len(untilTime)
+			if availableWidth < 10 {
+				// If not enough space for inline display, use multi-line
+				s.WriteString(
+					lipgloss.NewStyle().
+						Foreground(lipgloss.Color("#666666")). // Dimmed gray
+						SetString(sessionMsg).
+						String(),
+				)
+				s.WriteString("\n")
+				
+				// Task name on its own line with wrapping
+				s.WriteString(
+					lipgloss.NewStyle().
+						Foreground(lipgloss.Color("#B0DB43")). // Neon green
+						Width(maxWidth).
+						SetString(t.taskName).
+						String(),
+				)
+				s.WriteString("\n")
+				
+				// Until time on its own line
+				s.WriteString(
+					lipgloss.NewStyle().
+						Foreground(lipgloss.Color("#666666")). // Dimmed gray
+						SetString(strings.TrimPrefix(untilTime, " ")).
+						String(),
+				)
+			} else {
+				// Single line display
+				s.WriteString(
+					lipgloss.NewStyle().
+						Foreground(lipgloss.Color("#666666")). // Dimmed gray
+						SetString(sessionMsg).
+						String(),
+				)
+				
+				// Task name with available width
+				displayTask := t.taskName
+				if len(displayTask) > availableWidth {
+					displayTask = displayTask[:availableWidth-3] + "..."
+				}
+				
+				s.WriteString(
+					lipgloss.NewStyle().
+						Foreground(lipgloss.Color("#B0DB43")). // Neon green
+						SetString(displayTask).
+						String(),
+				)
+				
+				s.WriteString(
+					lipgloss.NewStyle().
+						Foreground(lipgloss.Color("#666666")). // Dimmed gray
+						SetString(untilTime).
+						String(),
+				)
+			}
 			
 			s.WriteString("\n")
 		}
