@@ -52,6 +52,9 @@ func Get() *cli.App {
 				Track your progress with detailed statistics reporting. Defaults to a 
 				reporting period of 7 days`,
 				Action: statsAction,
+				Flags: []cli.Flag{
+					statsPortFlag,
+				},
 			},
 			{
 				Name:   "status",

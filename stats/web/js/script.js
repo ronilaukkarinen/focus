@@ -101,6 +101,7 @@ function plotSummary(data) {
 
 function getChartOptions(seriesData, xaxisCategories, title) {
   const seriesName = 'Focus time';
+  const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
   const tooltip = {
     y: {
       formatter: (value) => {
@@ -122,6 +123,11 @@ function getChartOptions(seriesData, xaxisCategories, title) {
         show: false,
       },
       height: 300,
+      background: 'transparent',
+      foreColor: isDarkMode ? '#e0e0e0' : '#373d3f',
+    },
+    theme: {
+      mode: isDarkMode ? 'dark' : 'light',
     },
     dataLabels: {
       enabled: false,
@@ -240,6 +246,8 @@ function plotHourly(data) {
 function plotTags(data) {
   const tagsData = [];
   const tagsCategories = [];
+  const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  
   data.tags.forEach((item) => {
     tagsCategories.push(item.name);
     tagsData.push(Math.floor(item.duration / 60000000000));
@@ -258,6 +266,11 @@ function plotTags(data) {
     chart: {
       height: 300,
       type: 'pie',
+      background: 'transparent',
+      foreColor: isDarkMode ? '#e0e0e0' : '#373d3f',
+    },
+    theme: {
+      mode: isDarkMode ? 'dark' : 'light',
     },
     labels: tagsCategories,
     tooltip,

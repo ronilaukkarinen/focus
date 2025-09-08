@@ -66,7 +66,6 @@ var (
 		Usage: "List Focus sessions in JSON format",
 	}
 
-	//nolint:unused
 	statsPortFlag = &cli.UintFlag{
 		Name:  "port",
 		Usage: "Specify the port for the statistics server",

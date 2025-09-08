@@ -1,3 +1,15 @@
+## [Unreleased]
+
+### Fixed
+- Fix stats command not accepting port flag - added missing flag registration to stats command
+- Fix stats page showing empty data - JavaScript bundle was missing and needed to be built with esbuild
+- Fix spacing issue in stats page navigation by adding proper left padding to main navigation
+- Fix datepicker input styling to match theme with proper colors and calendar icon visibility in dark mode
+
+### Added
+- Add dark mode support to stats page - automatically follows system preferences
+- Charts now properly render in dark mode with appropriate themes
+
 ## 1.5.2 (2025-09-07)
 
 Bug fixes:
