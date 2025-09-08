@@ -71,7 +71,6 @@ type (
 		halfwayBellPlayed  bool
 		completeBellPlayed bool
 		celebratingCompletion bool
-		confettiStep      int
 		// Custom sound selection (replacing huh form)
 		soundOptions       []string
 		selectedSoundIndex int
@@ -690,7 +689,7 @@ func (t *Timer) triggerExternalConfetti() {
 		client := &http.Client{Timeout: 2 * time.Second}
 		resp, err := client.Post("http://localhost:3019/trigger-confetti", "application/json", nil)
 		if err == nil && resp != nil {
-			resp.Body.Close()
+			_ = resp.Body.Close()
 		}
 	}()
 }
