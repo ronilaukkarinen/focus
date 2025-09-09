@@ -1,10 +1,4 @@
 import ApexCharts from 'apexcharts';
-import {
-  easepick,
-  RangePlugin,
-  PresetPlugin,
-  TimePlugin,
-} from '@easepick/bundle';
 
 function getDateRanges() {
   const today = new Date();
@@ -324,7 +318,7 @@ function plotTags(data) {
   const tagOptions = {
     series: tagsData,
     chart: {
-      height: 380,
+      height: 400,
       type: 'pie',
       background: 'transparent',
       toolbar: { show: false },
@@ -342,7 +336,8 @@ function plotTags(data) {
         donut: {
           size: '0%'
         },
-        expandOnClick: false
+        expandOnClick: false,
+        size: 150
       }
     },
     dataLabels: {
@@ -422,7 +417,7 @@ function plotTasks(data) {
   const taskOptions = {
     series: tasksData,
     chart: {
-      height: 380,
+      height: 400,
       type: 'pie',
       background: 'transparent',
       toolbar: { show: false },
@@ -440,7 +435,8 @@ function plotTasks(data) {
         donut: {
           size: '0%'
         },
-        expandOnClick: false
+        expandOnClick: false,
+        size: 150
       }
     },
     dataLabels: {
@@ -489,52 +485,49 @@ function plotTasks(data) {
 document.addEventListener('DOMContentLoaded', async () => {
   try {
     const pickerEl = document.getElementById('datepicker');
+    if (!pickerEl) {
+      console.error('Datepicker element not found');
+      return;
+    }
+
     const startDate = new Date(pickerEl.dataset.start);
     const endDate = new Date(pickerEl.dataset.end);
 
+    // Simple preset range selector
     const presetDates = getDateRanges();
-
-    new easepick.create({
-      element: pickerEl,
-      css: ['/web/css/easepick_v1.2.1.css'],
-      zIndex: 10,
-      plugins: [RangePlugin, PresetPlugin, TimePlugin],
-      RangePlugin: {
-        startDate,
-        endDate,
-      },
-      PresetPlugin: {
-        customPreset: presetDates,
-      },
-      setup(picker) {
-        picker.on('select', (e) => {
-          const { start, end } = e.detail;
-          window.location.href = `${
-            window.location.pathname
-          }?start_time=${formatDate(start)}&end_time=${formatDate(end)}`;
-        });
-        
-        // Handle viewport positioning to avoid overflow
-        picker.on('show', (e) => {
-          setTimeout(() => {
-            const pickerContainer = document.querySelector('.easepick-wrapper');
-            if (pickerContainer) {
-              const rect = pickerContainer.getBoundingClientRect();
-              const viewportHeight = window.innerHeight;
-              
-              // If picker would go below viewport, position it above the input
-              if (rect.bottom > viewportHeight) {
-                const inputRect = pickerEl.getBoundingClientRect();
-                const pickerHeight = rect.height;
-                const topPosition = inputRect.top - pickerHeight - 10; // 10px margin
-                
-                pickerContainer.style.top = `${Math.max(10, topPosition)}px`;
-              }
-            }
-          }, 0);
-        });
-      },
+    
+    // Create dropdown to replace datepicker
+    const selectEl = document.createElement('select');
+    selectEl.id = 'daterange-select';
+    selectEl.className = pickerEl.className || '';
+    selectEl.style.cssText = pickerEl.style.cssText || '';
+    
+    // Add options for each preset
+    Object.entries(presetDates).forEach(([label, [start, end]]) => {
+      const option = document.createElement('option');
+      option.value = `${formatDate(start)}_${formatDate(end)}`;
+      option.textContent = label;
+      
+      // Set as selected if matches current range
+      const currentStart = formatDate(startDate);
+      const currentEnd = formatDate(endDate);
+      if (formatDate(start) === currentStart && formatDate(end) === currentEnd) {
+        option.selected = true;
+      }
+      
+      selectEl.appendChild(option);
     });
+    
+    // Handle selection change
+    selectEl.addEventListener('change', (e) => {
+      const [start_time, end_time] = e.target.value.split('_');
+      window.location.href = `${window.location.pathname}?start_time=${start_time}&end_time=${end_time}`;
+    });
+    
+    // Replace the input with select
+    if (pickerEl.parentNode) {
+      pickerEl.parentNode.replaceChild(selectEl, pickerEl);
+    }
 
     const body = document.getElementById('body');
     const data = JSON.parse(body.dataset.stats);

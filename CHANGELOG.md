@@ -1,4 +1,4 @@
-## Unreleased
+## 1.7.0 (2025-09-09)
 
 ### Changed
 - Fix "Top tag" label to correctly show "Top task" in statistics page
@@ -6,6 +6,9 @@
 - Use Instrument Serif font for numbers and Archivo for text/charts for improved typography
 - Improve statistics page styling with cleaner design, removed box shadows, and better hover effects
 - Update color scheme for better contrast and readability in both light and dark modes
+- Reduce pie chart sizes and improve layout consistency in statistics page
+- Fix legend display and alignment issues for pie charts
+- Add documentation for web UI build process in README
 
 ### Added
 - Improved statistics

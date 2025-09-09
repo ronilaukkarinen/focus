@@ -279,8 +279,8 @@ input[type='date']:focus,
 .chart-container {
   flex: 1;
   margin-top: auto;
-  height: 400px;
-  min-height: 400px;
+  height: 420px;
+  min-height: 420px;
   position: relative;
   width: 100%;
   display: flex;
@@ -327,7 +327,37 @@ input[type='date']:focus,
 .apexcharts-legend {
   max-width: 400px !important;
   margin: 0 auto !important;
+  max-height: 56px !important;
+  overflow: hidden !important;
 }
+
+.apexcharts-legend-text {
+  margin-left: -10px !important;
+}
+
+/* Date range select styling */
+#daterange-select {
+  background: #0a1218;
+  border: 1px solid #1a2a38;
+  color: #aaa;
+  padding: 8px 12px;
+  border-radius: 4px;
+  font-family: 'Archivo', sans-serif;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+#daterange-select:focus {
+  outline: none;
+  border-color: #7effe1;
+  box-shadow: 0 0 0 2px rgba(126, 255, 225, 0.2);
+}
+
+#daterange-select option {
+  background: #0a1218;
+  color: #aaa;
+}
+
 
 /* Dark scrollbars for the entire application */
 * {
