@@ -192,9 +192,22 @@ function plotWeekday(data) {
   const weekdayData = [];
   const weekCategories = [];
 
+  // Reorder weekdays to start with Monday instead of Sunday
+  const reorderedWeekdays = [];
+  const weekdayOrder = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+  
+  // Create a map for quick lookup
+  const weekdayMap = {};
   data.weekday.forEach((item) => {
-    weekdayData.push(Math.floor(item.duration / 60000000000));
-    weekCategories.push(item.name);
+    weekdayMap[item.name] = item;
+  });
+  
+  // Add weekdays in Monday-first order
+  weekdayOrder.forEach((dayName) => {
+    if (weekdayMap[dayName]) {
+      weekdayData.push(Math.floor(weekdayMap[dayName].duration / 60000000000));
+      weekCategories.push(dayName);
+    }
   });
 
   const weekdayOptions = getChartOptions(
