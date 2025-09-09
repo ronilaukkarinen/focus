@@ -1,0 +1,60 @@
+# Example Focus Configuration
+# Copy this file to ~/.config/focus/config.yml and customize as needed
+
+# Work session settings
+work:
+  duration: 25m
+  message: Focus on your task
+  sound: loud_bell
+  color: '#B0DB43'
+
+# Short break settings
+short_break:
+  duration: 5m
+  message: Take a breather
+  sound: bell
+  color: '#12EAEA'
+
+# Long break settings
+long_break:
+  duration: 15m
+  message: Take a long break
+  sound: bell
+  color: '#C492B1'
+
+# General settings
+settings:
+  long_break_interval: 4
+  auto_start_break: true
+  auto_start_work: false
+  24hr_clock: false
+  sound_on_break: false
+  strict: false
+  
+  # Flow timer settings
+  flow_default: true
+  flow_bell: true
+  flow_bell_sound: tibetan_bell
+  
+  # Confetti celebration (requires raycast-confetti-server)
+  confetti_enabled: false
+  
+  # Pre-defined tags for quick task categorization
+  # These will appear as a dropdown in flow timer mode
+  pre_defined_tags:
+    - "Sales"
+    - "Company Finances"
+    - "Product Development"
+    - "Customer Support"
+    - "Marketing"
+    - "Research & Development"
+    - "Operations"
+    - "HR & Admin"
+
+# Notification settings
+notifications:
+  enabled: true
+
+# Display settings
+display:
+  dark_theme: true

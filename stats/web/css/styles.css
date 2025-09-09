@@ -1,22 +1,58 @@
 :root {
-  --bg-primary: rgb(250, 250, 250);
-  --bg-secondary: #fff;
-  --text-primary: #000;
-  --text-secondary: rgba(0, 0, 0, 0.5);
-  --border-color: #ddd;
-  --shadow: rgba(17, 17, 26, 0.05) 0px 1px 0px,
-    rgba(17, 17, 26, 0.1) 0px 0px 8px;
+  /* Colors matching dashboard */
+  --color-dark-navy: #030b11;
+  --color-widget-bg: transparent;
+  --color-text-primary: #fff;
+  --color-text-secondary: #aaa;
+  --color-text-muted: #777;
+  --color-accent: #7effe1;
+  --color-green: #12b06a;
+  --color-red: #c94b5a;
+  --color-yellow: #ffd700;
+  --color-border: rgb(255 255 255 / 8.7%);
+  --color-border-hover: rgb(255 255 255 / 20%);
+
+  /* Spacing */
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+
+  /* Typography */
+  --font-family: 'Archivo', -apple-system, blinkmacsystemfont, 'Segoe UI', system-ui, sans-serif;
+  --font-family-display: 'Instrument Serif', serif;
+  --font-size-xs: 0.8rem;
+  --font-size-sm: 0.9rem;
+  --font-size-md: 1rem;
+  --font-size-lg: 1.5rem;
+  --font-size-xl: 2.5rem;
+  --font-weight-light: 300;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+
+  /* Borders */
+  --border-radius: 8px;
+  --border-radius-sm: 6px;
+
+  /* Transitions */
+  --transition: all 0.2s ease;
+
+  /* Chart */
+  --chart-height: 200px;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg-primary: #1a1a1a;
-    --bg-secondary: #2a2a2a;
+    --bg-primary: #0a0a0a;
+    --bg-secondary: #141414;
     --text-primary: #e0e0e0;
-    --text-secondary: rgba(224, 224, 224, 0.6);
-    --border-color: #444;
-    --shadow: rgba(0, 0, 0, 0.3) 0px 1px 0px,
-      rgba(0, 0, 0, 0.5) 0px 0px 8px;
+    --text-secondary: rgba(224, 224, 224, 0.7);
+    --text-muted: rgba(224, 224, 224, 0.5);
+    --border-color: rgba(255, 255, 255, 0.08);
+    --shadow: none;
+    --accent: #7effe1;
   }
   
   .logo img {
@@ -60,70 +96,90 @@ img {
   height: auto;
 }
 
-@font-face {
-  font-family: 'Inter';
-  src: url('../fonts/Inter-Regular.woff') format('woff');
-  font-weight: 400;
-}
-
-@font-face {
-  font-family: 'Inter';
-  src: url('../fonts/Inter-SemiBold.woff') format('woff');
-  font-weight: 600;
-}
-
-@font-face {
-  font-family: 'Inter';
-  src: url('../fonts/Inter-Bold.woff') format('woff');
-  font-weight: 700;
-}
+/* Using Google Fonts instead of local fonts */
 
 body {
-  background-color: var(--bg-primary);
-  color: var(--text-primary);
-  font-family: 'Inter', sans-serif;
+  background: radial-gradient(ellipse at center top, #0b2522 0%, var(--color-dark-navy) 50%, #000000 100%);
+  background-attachment: fixed;
+  color: var(--color-text-primary);
+  font-family: var(--font-family);
+  font-weight: 400;
+  line-height: 1.6;
+  min-height: 100vh;
+  padding-bottom: 80px;
 }
 
 main {
   margin: 0 auto;
-  padding: 0 50px;
+  padding: 2rem 50px 0 50px;
   max-width: 1450px;
 }
 
-nav {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  border-bottom: 1px solid var(--border-color);
-  margin-bottom: 30px;
+
+/* Footer styling matching dashboard */
+.footer {
+  backdrop-filter: blur(10px);
+  background: rgb(3 11 17 / 70%);
+  border-top: 1px solid var(--color-border);
+  bottom: 0;
+  left: 0;
+  padding: var(--spacing-md) 0;
+  position: fixed;
+  right: 0;
+  z-index: 100;
 }
 
-.main-nav {
+.footer-content {
+  align-items: center;
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  padding: 10px 10px 10px 20px;
-  width: 100%;
+  margin: 0 auto;
+  max-width: 1450px;
+  padding: 0 var(--spacing-lg);
 }
 
-.logo {
-  min-width: 52px;
-  min-height: 52px;
+.footer-left {
+  align-items: center;
   display: flex;
-  justify-content: center;
+  gap: var(--spacing-md);
+}
+
+.footer-logo {
+  opacity: 0.8;
+}
+
+.footer-text {
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-normal);
+  opacity: 0.8;
+}
+
+.footer-right {
+  display: flex;
   align-items: center;
 }
 
 input[type='date'],
 #datepicker {
-  padding: 10px;
-  border-radius: 10px;
+  padding: 10px 14px;
+  border-radius: var(--border-radius);
   outline: none;
-  border: 1px solid var(--border-color);
-  background-color: var(--bg-secondary);
-  color: var(--text-primary);
-  box-shadow: var(--shadow);
-  font-family: 'Inter', sans-serif;
+  border: 1px solid var(--color-border);
+  background-color: var(--color-widget-bg);
+  color: var(--color-text-primary);
+  font-family: var(--font-family);
+  transition: var(--transition);
+}
+
+input[type='date']:hover,
+#datepicker:hover {
+  border-color: var(--color-border-hover);
+}
+
+input[type='date']:focus,
+#datepicker:focus {
+  border-color: var(--color-accent);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -146,26 +202,42 @@ input[type='date'],
 
 .summary-item {
   flex: 1;
-  padding: 20px;
-  background-color: var(--bg-secondary);
-  border-radius: 10px;
-  box-shadow: var(--shadow);
+  padding: var(--spacing-lg);
+  background-color: var(--color-widget-bg);
+  border-radius: var(--border-radius);
+  border: 1px solid var(--color-border);
+  transition: var(--transition);
+  min-height: 120px;
+  display: flex;
+  flex-direction: column;
+}
+
+.summary-item:hover {
+  border-color: var(--color-border-hover);
 }
 
 .summary-title {
-  color: var(--text-secondary);
-  margin-bottom: 8px;
+  color: var(--color-text-secondary);
+  cursor: help;
+  font-size: var(--font-size-xs);
+  line-height: 1.3;
+  margin-bottom: var(--spacing-sm);
 }
 
 .tag-hours {
+  font-family: var(--font-family-display);
   font-weight: 400;
-  color: var(--text-secondary);
-  font-size: 1rem;
+  color: var(--color-text-muted);
+  font-size: calc(var(--font-size-xl) * 0.7);
+  margin-left: 0.5rem;
 }
 
 .summary-num {
-  font-size: 1.5rem;
-  font-weight: 600;
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-xl);
+  font-weight: 400;
+  line-height: 1.2;
+  color: rgb(255 255 255 / 90%);
 }
 
 .columns {
@@ -176,17 +248,25 @@ input[type='date'],
 }
 .column {
   flex: 40%;
-  border-radius: 10px;
-  background-color: var(--bg-secondary);
-  /* width: 50%; */
-  padding: 15px;
-  /* border: 1px solid black; */
-  box-shadow: var(--shadow);
+  border-radius: var(--border-radius);
+  background-color: var(--color-widget-bg);
+  padding: var(--spacing-lg);
+  border: 1px solid var(--color-border);
+  transition: var(--transition);
+  min-height: 320px;
+  display: flex;
+  flex-direction: column;
+}
+
+.column:hover {
+  border-color: var(--color-border-hover);
 }
 .chart-title {
-  font-size: 1.2rem;
-  font-weight: 600;
-  margin-bottom: 20px;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-normal);
+  margin-bottom: var(--spacing-md);
+  letter-spacing: 0.05em;
+  color: var(--color-text-secondary);
 }
 
 @media screen and (max-width: 992px) {
@@ -195,14 +275,172 @@ input[type='date'],
   }
 }
 
-@media screen and (max-width: 600px) {
-  .logo {
-    font-size: 1.5rem;
+/* Chart container styling */
+.chart-container {
+  flex: 1;
+  margin-top: auto;
+  height: 400px;
+  min-height: 400px;
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.chart-container > div {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  align-items: center;
+}
+
+/* ApexCharts specific overrides */
+.apexcharts-canvas {
+  background: transparent !important;
+}
+
+.apexcharts-tooltip {
+  background: rgba(3, 11, 17, 0.95) !important;
+  border: 1px solid rgb(255 255 255 / 8.7%) !important;
+  color: #fff !important;
+}
+
+.apexcharts-tooltip-title {
+  background: transparent !important;
+  border: none !important;
+  color: #7effe1 !important;
+}
+
+#js-main-chart,
+#js-hourly-chart,
+#js-weekday-chart {
+  width: 100%;
+  height: 100%;
+}
+
+#js-tags-chart,
+#js-tasks-chart {
+  width: 100%;
+}
+
+.apexcharts-legend {
+  max-width: 400px !important;
+  margin: 0 auto !important;
+}
+
+/* Dark scrollbars for the entire application */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.2) rgba(0, 0, 0, 0.1);
+}
+
+*::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+
+*::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 2px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 2px;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* Override ApexCharts styles for dashboard look */
+.apexcharts-tooltip {
+  background: #000 !important;
+  border: 1px solid var(--color-border) !important;
+  box-shadow: none !important;
+  color: var(--color-text-primary) !important;
+}
+
+.apexcharts-tooltip-title {
+  background: transparent !important;
+  border: none !important;
+  color: var(--color-text-secondary) !important;
+  font-family: var(--font-family) !important;
+}
+
+.apexcharts-tooltip-y-group {
+  color: var(--color-text-primary) !important;
+}
+
+@media (width <= 1500px) {
+  :root {
+    --font-size-xl: 2rem;
   }
-  .main {
-    padding: 0 20px;
+}
+
+@media screen and (max-width: 992px) {
+  .column {
+    flex: 50%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .column {
+    padding: var(--spacing-md);
+  }
+  
+  #js-main-chart,
+  #js-hourly-chart,
+  #js-weekday-chart {
+    height: 150px;
+    min-height: 150px;
+  }
+  
+}
+
+@media screen and (max-width: 768px) {
+  .footer {
+    padding: var(--spacing-md) 0;
+  }
+
+  .footer-content {
+    padding: 0 var(--spacing-md);
+  }
+
+  .footer-logo {
+    width: 20px;
+    height: 20px;
+  }
+
+  .footer-text {
+    font-size: var(--font-size-xs);
+  }
+}
+
+@media screen and (max-width: 600px) {
+  main {
+    padding: 0 var(--spacing-md);
   }
   .summary {
     flex-direction: column;
+  }
+  
+  .summary-num {
+    font-size: var(--font-size-lg);
+  }
+  
+  .footer {
+    padding: 10px 0;
+  }
+
+  .footer-content {
+    flex-direction: column;
+    gap: var(--spacing-sm);
+    padding: 0 10px;
+  }
+  
+  .footer-left {
+    gap: 10px;
   }
 }

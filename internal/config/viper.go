@@ -36,6 +36,7 @@ const (
 	keyFlowDefault          = "flow_default"
 	keyConfettiEnabled      = "confetti_enabled"
 	keyDarkTheme            = "dark_theme"
+	keyPreDefinedTags       = "pre_defined_tags"
 )
 
 // WithViperConfig returns an Option that loads configuration from Viper.
@@ -145,6 +146,7 @@ func loadViperConfig(v *viper.Viper, c *Config) error {
 	c.Settings.FlowBellSound = v.GetString(keyFlowBellSound)
 	c.Settings.FlowDefault = v.GetBool(keyFlowDefault)
 	c.Settings.ConfettiEnabled = v.GetBool(keyConfettiEnabled)
+	c.Settings.PreDefinedTags = v.GetStringSlice(keyPreDefinedTags)
 	
 	c.Notifications.Enabled = v.GetBool(keyNotificationsEnabled)
 	c.Display.DarkTheme = v.GetBool(keyDarkTheme)

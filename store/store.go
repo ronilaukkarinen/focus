@@ -6,6 +6,7 @@ import (
 	"encoding/json"
 	"errors"
 	"io/fs"
+	"os"
 	"slices"
 	"time"
 
@@ -154,6 +155,43 @@ func openDB(dbFilePath string) (*bolt.DB, error) {
 	return db, nil
 }
 
+// openDBReadOnly opens the database with read-only access and longer timeout
+// This allows stats to run while the timer is active
+func openDBReadOnly(dbFilePath string) (*bolt.DB, error) {
+	var fileMode fs.FileMode = 0o600
+
+	// Check if database file exists first
+	if _, err := os.Stat(dbFilePath); os.IsNotExist(err) {
+		// Database doesn't exist, create it with write access
+		return bolt.Open(
+			dbFilePath,
+			fileMode,
+			&bolt.Options{Timeout: 10 * time.Second},
+		)
+	}
+
+	// First try read-only access
+	db, err := bolt.Open(
+		dbFilePath,
+		fileMode,
+		&bolt.Options{
+			Timeout:  10 * time.Second, // Longer timeout for read-only access
+			ReadOnly: true,             // Read-only mode
+		},
+	)
+
+	// If read-only fails, fall back to regular access with longer timeout
+	if err != nil {
+		db, err = bolt.Open(
+			dbFilePath,
+			fileMode,
+			&bolt.Options{Timeout: 10 * time.Second}, // Longer timeout than regular openDB
+		)
+	}
+
+	return db, err
+}
+
 // NewClient returns a wrapper to a BoltDB connection.
 func NewClient(dbFilePath string) (*Client, error) {
 	db, err := openDB(dbFilePath)
@@ -205,4 +243,32 @@ func NewClient(dbFilePath string) (*Client, error) {
 	})
 
 	return c, err
+}
+
+// NewReadOnlyClient returns a read-only wrapper to a BoltDB connection.
+// This allows stats to access the database while the timer is running.
+func NewReadOnlyClient(dbFilePath string) (*Client, error) {
+	db, err := openDBReadOnly(dbFilePath)
+	if err != nil {
+		return nil, err
+	}
+
+	client := &Client{DB: db}
+
+	// Check if we need to create buckets (in case we fell back to write mode)
+	if !db.IsReadOnly() {
+		err = db.Update(func(tx *bolt.Tx) error {
+			_, err := tx.CreateBucketIfNotExists([]byte(sessionBucket))
+			if err != nil {
+				return err
+			}
+			_, err = tx.CreateBucketIfNotExists([]byte(focusBucket))
+			return err
+		})
+		if err != nil {
+			return nil, err
+		}
+	}
+
+	return client, nil
 }

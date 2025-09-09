@@ -1,3 +1,19 @@
+## Unreleased
+
+### Changed
+- Fix "Top tag" label to correctly show "Top task" in statistics page
+- Replace Inter font with Archivo for better text rendering and fix font loading issues
+- Use Instrument Serif font for numbers and Archivo for text/charts for improved typography
+- Improve statistics page styling with cleaner design, removed box shadows, and better hover effects
+- Update color scheme for better contrast and readability in both light and dark modes
+
+### Added
+- Improved statistics
+- Track tags in the pie chart
+- Add support for pre-defined tags in configuration file via `pre_defined_tags` setting
+- Add tag selection dropdown in flow timer when pre-defined tags are configured
+- Allow special characters and spaces in pre-defined tags for better flexibility
+
 ## 1.6.0 (2025-09-08)
 
 ### Fixed

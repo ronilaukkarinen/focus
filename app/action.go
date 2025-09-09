@@ -96,6 +96,23 @@ func sessionHelper(ctx *cli.Context) ([]*models.Session, store.DB, error) {
 	return sessions, db, nil
 }
 
+// sessionHelperReadOnly is a read-only version for stats that can run while timer is active
+func sessionHelperReadOnly(ctx *cli.Context) ([]*models.Session, store.DB, error) {
+	conf := config.Filter(ctx)
+
+	db, err := store.NewReadOnlyClient(config.DBFilePath())
+	if err != nil {
+		return nil, nil, err
+	}
+
+	sessions, err := db.GetSessions(conf.StartTime, conf.EndTime, conf.Tags)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	return sessions, db, nil
+}
+
 // editConfigAction handles the edit-config command which opens the focus config
 // file in the user's default text editor.
 func editConfigAction(ctx *cli.Context) error {

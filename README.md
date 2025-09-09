@@ -34,6 +34,7 @@ primarily uses **flow timer mode** for a more flexible approach to time tracking
 - You can pause and resume work sessions.
 - You can skip break sessions.
 - **Flow timer mode**: Count-up timer with task tracking and milestone notifications.
+- **Pre-defined tags**: Configure categories for quick task organization (supports spaces and special characters).
 - You can customise the number of sessions before a long break.
 - You can set a maximum number of sessions.
 - Desktop notifications are supported on all platforms.
@@ -196,6 +197,15 @@ sound_on_break: false # play ambient sound during break sessions
 flow_default: true # use flow timer mode by default (set to false for traditional pomodoro)
 flow_bell: true # play bell sounds at flow timer milestones (50% and 100%)
 flow_bell_sound: 'tibetan_bell' # sound file for flow timer bells (bell, loud_bell, tibetan_bell)
+
+# Pre-defined tags for categorizing work sessions
+pre_defined_tags: [] # optional list of tags for quick selection
+# Example:
+# pre_defined_tags:
+#   - "Sales"
+#   - "Company Finances"
+#   - "Product Development"
+#   - "Customer Support"
 
 # Other settings
 session_cmd: '' # execute an arbitrary command after each session
@@ -481,11 +491,44 @@ This project includes comprehensive development tooling:
 - **Pre-commit hooks**: Automatic linting and formatting on commit
 - **Build tools**: Run `just build` to compile binaries
 
+### Building the Web UI
+
+The stats web interface uses embedded files that need to be rebuilt when changed:
+
+1. **Install dependencies** (if not already installed):
+   ```bash
+   npm install
+   ```
+
+2. **Make changes** to files in `stats/web/`:
+   - JavaScript: `stats/web/js/script.js`
+   - CSS: `stats/web/css/styles.css`
+   - HTML: `stats/web/index.html`
+
+3. **Bundle JavaScript** (if JS was modified):
+   ```bash
+   npx esbuild --bundle --minify --outfile=stats/web/dist/script.js --sourcemap stats/web/js/script.js
+   ```
+
+4. **Rebuild the Go binary** (required for all web changes):
+   ```bash
+   go build -o focus ./cmd/focus
+   ```
+
+5. **Restart the stats server**:
+   ```bash
+   ./focus stats
+   ```
+
+**Note:** The web files are embedded into the Go binary using `//go:embed`, so the binary must be rebuilt after any changes to see them take effect.
+
 The project uses:
 - [just](https://github.com/casey/just) for task running
 - [golangci-lint v2](https://golangci-lint.run/) for code quality
 - [pre-commit](https://pre-commit.com/) for git hooks
 - tools.mod for development dependency management
+- [esbuild](https://esbuild.github.io/) for JavaScript bundling
+- Go embed for static file embedding
 
 ## ⚖ Licence
 

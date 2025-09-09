@@ -376,6 +376,8 @@ func (t *Timer) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		if t.progress.Width > maxWidth {
 			t.progress.Width = maxWidth
 		}
+		
+		t.terminalHeight = msg.Height
 
 		return t, nil
 

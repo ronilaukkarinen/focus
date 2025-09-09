@@ -156,11 +156,8 @@ func (t *Timer) timerView() string {
 						String(),
 				)
 				
-				// Task name with available width
+				// Task name - allow natural wrapping, no truncation
 				displayTask := t.taskName
-				if len(displayTask) > availableWidth {
-					displayTask = displayTask[:availableWidth-3] + "..."
-				}
 				
 				s.WriteString(
 					lipgloss.NewStyle().

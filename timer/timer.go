@@ -64,6 +64,7 @@ type (
 		waitForNextSession bool
 		flowMode           bool
 		taskName           string
+		selectedTag        string
 		estimatedTime      time.Duration
 		estimatedTimeStr   string
 		elapsedTime        time.Duration
@@ -75,6 +76,7 @@ type (
 		soundOptions       []string
 		selectedSoundIndex int
 		showingSoundMenu   bool
+		terminalHeight     int
 	}
 
 	keymap struct {
@@ -327,22 +329,67 @@ func (t *Timer) promptFlowModeInfo() tea.Cmd {
 		formWidth = t.progress.Width
 	}
 	
-	// Create a form to get task name and estimated time
-	t.soundForm = huh.NewForm(
-		huh.NewGroup(
-			huh.NewInput().
-				Key("taskName").
-				Title("What are you working on?").
-				Value(&t.taskName).
-				Placeholder("Enter task name...").
-				CharLimit(200), // Allow longer task names
-			huh.NewInput().
-				Key("estimatedTime").
-				Title("Estimated time (e.g., 25m, 1h30m)?").
-				Value(&t.estimatedTimeStr).
-				Placeholder("25m"),
-		),
+	// Calculate available height for small terminals
+	// Need at least 8 lines: 3 for fields + 2 for navigation + 3 for padding
+	minHeight := 8
+	maxDropdownHeight := 4
+	
+	if t.terminalHeight > 0 && t.terminalHeight < 15 {
+		// Very small terminal - limit dropdown height more aggressively
+		maxDropdownHeight = 3
+	}
+	
+	// Build form fields
+	var fields []huh.Field
+	
+	// Add task name input with compact styling
+	fields = append(fields, huh.NewInput().
+		Key("taskName").
+		Title("Task").
+		Value(&t.taskName).
+		Placeholder("What are you working on?").
+		CharLimit(200)) // Allow longer task names
+	
+	// Add tag selection if pre-defined tags are available
+	if len(t.Opts.Settings.PreDefinedTags) > 0 {
+		// Create options for the select field
+		options := make([]huh.Option[string], 0, len(t.Opts.Settings.PreDefinedTags)+1)
+		options = append(options, huh.NewOption("None", ""))
+		for _, tag := range t.Opts.Settings.PreDefinedTags {
+			options = append(options, huh.NewOption(tag, tag))
+		}
+		
+		fields = append(fields, huh.NewSelect[string]().
+			Key("tag").
+			Title("Category").
+			Options(options...).
+			Height(maxDropdownHeight). // Dynamically limit dropdown height
+			Value(&t.selectedTag))
+	}
+	
+	// Add estimated time input
+	fields = append(fields, huh.NewInput().
+		Key("estimatedTime").
+		Title("Time").
+		Value(&t.estimatedTimeStr).
+		Placeholder("e.g., 25m, 1h30m"))
+	
+	// Create a form with the fields using compact layout
+	form := huh.NewForm(
+		huh.NewGroup(fields...),
 	).WithWidth(formWidth)
+	
+	// Try to make the form fit in small terminals
+	if t.terminalHeight > 0 && t.terminalHeight < 20 {
+		// Use available height minus some padding
+		availableHeight := t.terminalHeight - 4
+		if availableHeight < minHeight {
+			availableHeight = minHeight
+		}
+		form = form.WithHeight(availableHeight)
+	}
+	
+	t.soundForm = form
 	t.settings = "flowPrompt"
 	return t.soundForm.Init()
 }
@@ -357,11 +404,17 @@ func (t *Timer) initFlowTimer() error {
 	}
 	t.estimatedTime = dur
 	
-	// Create a session with the task name
+	// Create a session with the task name and selected tag
+	tags := append([]string{}, t.Opts.CLI.Tags...)
+	tags = append(tags, t.taskName)
+	if t.selectedTag != "" {
+		tags = append(tags, t.selectedTag)
+	}
+	
 	sess := &Session{
 		Name:      config.Work,
 		Duration:  dur,
-		Tags:      append(t.Opts.CLI.Tags, t.taskName),
+		Tags:      tags,
 		Completed: false,
 		StartTime: time.Now(),
 		EndTime:   time.Now().Add(dur),

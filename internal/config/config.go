@@ -36,18 +36,19 @@ type (
 
 	// SettingsConfig contains general application settings.
 	SettingsConfig struct {
-		AmbientSound      string `mapstructure:"ambient_sound"`
-		Cmd               string `mapstructure:"cmd"`
-		LongBreakInterval int    `mapstructure:"long_break_interval"`
-		AutoStartBreak    bool   `mapstructure:"auto_start_break"`
-		AutoStartWork     bool   `mapstructure:"auto_start_work"`
-		SoundOnBreak      bool   `mapstructure:"sound_on_break"`
-		Strict            bool   `mapstructure:"strict"`
-		TwentyFourHour    bool   `mapstructure:"24hr_clock"`
-		FlowBell          bool   `mapstructure:"flow_bell"`
-		FlowBellSound     string `mapstructure:"flow_bell_sound"`
-		FlowDefault       bool   `mapstructure:"flow_default"`
-		ConfettiEnabled   bool   `mapstructure:"confetti_enabled"`
+		AmbientSound      string   `mapstructure:"ambient_sound"`
+		Cmd               string   `mapstructure:"cmd"`
+		LongBreakInterval int      `mapstructure:"long_break_interval"`
+		AutoStartBreak    bool     `mapstructure:"auto_start_break"`
+		AutoStartWork     bool     `mapstructure:"auto_start_work"`
+		SoundOnBreak      bool     `mapstructure:"sound_on_break"`
+		Strict            bool     `mapstructure:"strict"`
+		TwentyFourHour    bool     `mapstructure:"24hr_clock"`
+		FlowBell          bool     `mapstructure:"flow_bell"`
+		FlowBellSound     string   `mapstructure:"flow_bell_sound"`
+		FlowDefault       bool     `mapstructure:"flow_default"`
+		ConfettiEnabled   bool     `mapstructure:"confetti_enabled"`
+		PreDefinedTags    []string `mapstructure:"pre_defined_tags"`
 	}
 
 	// arguments.
