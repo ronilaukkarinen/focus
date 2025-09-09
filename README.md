@@ -51,11 +51,7 @@ primarily uses **flow timer mode** for a more flexible approach to time tracking
 
 <img width="675" height="684" alt="Screenshot from 2025-09-07 10-06-36" src="https://github.com/user-attachments/assets/6ffce6c2-5940-4f73-9eee-b6b0cbf538b4" />
 
-![Focus first run](https://ik.imagekit.io/turnupdev/focus-screenshot_6BU22Sj-J.png)
-
-![Focus statistics](https://ik.imagekit.io/turnupdev/focus-stats-screenshot_0dLtjklu_0.png)
-
-![Focus](https://ik.imagekit.io/turnupdev/focus-ops_bcJ7-Gnuag.png)
+<img width="1741" height="1166" alt="image" src="https://github.com/user-attachments/assets/d624e1fa-696c-4ba3-9bf8-652bf1f56bff" />
 
 ## ⚡ Installation
 
