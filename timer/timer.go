@@ -404,9 +404,8 @@ func (t *Timer) initFlowTimer() error {
 	}
 	t.estimatedTime = dur
 	
-	// Create a session with the task name and selected tag
+	// Create a session with the selected tag (task name is not a tag)
 	tags := append([]string{}, t.Opts.CLI.Tags...)
-	tags = append(tags, t.taskName)
 	if t.selectedTag != "" {
 		tags = append(tags, t.selectedTag)
 	}
