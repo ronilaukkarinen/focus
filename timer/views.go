@@ -47,7 +47,18 @@ func (t *Timer) completionCelebrationView() string {
 	if t.taskName != "" {
 		taskText := fmt.Sprintf("🎉 Finished: %s", t.taskName)
 		s.WriteString(taskCompleteStyle.Render(taskText))
-		s.WriteString("\n\n")
+		s.WriteString("\n")
+		
+		// Show description if provided
+		if t.taskDescription != "" {
+			descStyle := lipgloss.NewStyle().
+				Foreground(lipgloss.Color("#888888")).
+				Align(lipgloss.Center).
+				Width(maxWidth)
+			s.WriteString(descStyle.Render(t.taskDescription))
+		}
+		
+		s.WriteString("\n")
 	}
 	
 	timeStyle := lipgloss.NewStyle().
@@ -140,6 +151,18 @@ func (t *Timer) timerView() string {
 				)
 				s.WriteString("\n")
 				
+				// Task description if provided
+				if t.taskDescription != "" {
+					s.WriteString(
+						lipgloss.NewStyle().
+							Foreground(lipgloss.Color("#888888")). // Light gray
+							Width(maxWidth).
+							SetString(t.taskDescription).
+							String(),
+					)
+					s.WriteString("\n")
+				}
+				
 				// Until time on its own line
 				s.WriteString(
 					lipgloss.NewStyle().
@@ -185,13 +208,7 @@ func (t *Timer) timerView() string {
 		// Check if we're in overtime
 		isOvertime := t.elapsedTime > t.estimatedTime
 		
-		s.WriteString(
-			lipgloss.NewStyle().
-				Foreground(lipgloss.Color("#888")).
-				SetString("Elapsed / Estimated").
-				String(),
-		)
-		s.WriteString("\n\n")
+		s.WriteString("\n")
 		
 		// Color the elapsed time red if in overtime
 		if isOvertime {
@@ -204,7 +221,7 @@ func (t *Timer) timerView() string {
 		} else {
 			s.WriteString(timeDisplay)
 		}
-		s.WriteString(" / " + estimatedDisplay)
+		s.WriteString("/" + estimatedDisplay)
 		
 		// Progress bar based on estimated time
 		percent := t.elapsedTime.Seconds() / t.estimatedTime.Seconds()

@@ -64,6 +64,7 @@ type (
 		waitForNextSession bool
 		flowMode           bool
 		taskName           string
+		taskDescription    string
 		selectedTag        string
 		estimatedTime      time.Duration
 		estimatedTimeStr   string
@@ -349,6 +350,14 @@ func (t *Timer) promptFlowModeInfo() tea.Cmd {
 		Value(&t.taskName).
 		Placeholder("What are you working on?").
 		CharLimit(200)) // Allow longer task names
+	
+	// Add task description (optional)
+	fields = append(fields, huh.NewInput().
+		Key("taskDescription").
+		Title("Description (optional)").
+		Value(&t.taskDescription).
+		Placeholder("Add details about the task...").
+		CharLimit(500))
 	
 	// Add tag selection if pre-defined tags are available
 	if len(t.Opts.Settings.PreDefinedTags) > 0 {
