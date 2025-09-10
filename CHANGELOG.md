@@ -1,3 +1,10 @@
+## Unreleased
+
+### Fixed
+- Remove task names from being saved as tags in flow mode
+- Remove unused sessionHelperReadOnly function that was causing linter errors
+- Change weekday chart to start with Monday instead of Sunday
+
 ## 1.7.0 (2025-09-09)
 
 ### Changed
