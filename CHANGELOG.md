@@ -1,5 +1,17 @@
 ## Unreleased
 
+## 1.7.2 (2025-09-11)
+
+### Fixed
+- Fix "until" time display bug showing current time instead of estimated end time in flow mode
+- Clear task description field automatically for new flow sessions
+
+### Added
+- Add type-ahead functionality to category dropdown - users can now type letters to filter categories
+
+### Changed
+- Add release process documentation to README
+
 ## 1.7.1 (2025-09-11)
 
 ### Changed  

@@ -127,7 +127,9 @@ func (t *Timer) timerView() string {
 			} else {
 				timeFormat = "03:04:05 PM"
 			}
-			untilTime := " until " + t.Current.EndTime.Format(timeFormat)
+			// Calculate the estimated end time dynamically from start time + estimated duration
+			estimatedEndTime := t.StartTime.Add(t.estimatedTime)
+			untilTime := " until " + estimatedEndTime.Format(timeFormat)
 			
 			// Calculate available space for task name
 			availableWidth := maxWidth - len(sessionMsg) - len(untilTime)

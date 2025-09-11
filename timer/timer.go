@@ -352,9 +352,11 @@ func (t *Timer) promptFlowModeInfo() tea.Cmd {
 		CharLimit(200)) // Allow longer task names
 	
 	// Add task description (optional)
+	// Reset description to empty for each new flow session
+	t.taskDescription = ""
 	fields = append(fields, huh.NewInput().
 		Key("taskDescription").
-		Title("Description (optional)").
+		Title("Description (optional - press Enter to skip)").
 		Value(&t.taskDescription).
 		Placeholder("Add details about the task...").
 		CharLimit(500))
@@ -373,6 +375,8 @@ func (t *Timer) promptFlowModeInfo() tea.Cmd {
 			Title("Category").
 			Options(options...).
 			Height(maxDropdownHeight). // Dynamically limit dropdown height
+			Filterable(true).
+			Filtering(true).
 			Value(&t.selectedTag))
 	}
 	
