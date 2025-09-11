@@ -1,6 +1,6 @@
 {
   "name": "@ronilaukkarinen/focus",
-  "version": "1.7.2",
+  "version": "1.7.3",
   "description": "Focus is a flexible command-line productivity timer with flow mode for uninterrupted work sessions",
   "main": "",
   "repository": "https://github.com/ronilaukkarinen/focus",

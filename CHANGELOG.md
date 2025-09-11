@@ -1,4 +1,4 @@
-## Unreleased
+## 1.7.3 (2025-09-11)
 
 ### Fixed
 - Fix category dropdown filtering by updating huh library to v0.7.0 and using correct Filtering method
