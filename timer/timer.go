@@ -356,9 +356,9 @@ func (t *Timer) promptFlowModeInfo() tea.Cmd {
 	t.taskDescription = ""
 	fields = append(fields, huh.NewInput().
 		Key("taskDescription").
-		Title("Description (optional - press Enter to skip)").
+		Title("Description").
 		Value(&t.taskDescription).
-		Placeholder("Add details about the task...").
+		Placeholder("Optional details...").
 		CharLimit(500))
 	
 	// Add tag selection if pre-defined tags are available
@@ -388,10 +388,8 @@ func (t *Timer) promptFlowModeInfo() tea.Cmd {
 	
 	// Create separate groups for pagination - one field per page
 	var groups []*huh.Group
-	totalFields := len(fields)
-	for i, field := range fields {
-		title := fmt.Sprintf("Flow timer setup (%d/%d)", i+1, totalFields)
-		groups = append(groups, huh.NewGroup(field).Title(title))
+	for _, field := range fields {
+		groups = append(groups, huh.NewGroup(field))
 	}
 	
 	form := huh.NewForm(groups...).WithWidth(formWidth)
