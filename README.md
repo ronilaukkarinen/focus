@@ -518,6 +518,35 @@ The stats web interface uses embedded files that need to be rebuilt when changed
 
 **Note:** The web files are embedded into the Go binary using `//go:embed`, so the binary must be rebuilt after any changes to see them take effect.
 
+## 🚀 Release process
+
+To create a new release:
+
+1. **Update version numbers**:
+   - Update version in `package.json`
+   - Update version badge in `README.md`
+   - Update `CHANGELOG.md` with release notes
+
+2. **Commit changes**:
+   ```bash
+   git add .
+   git commit -m "Release version X.Y.Z"
+   ```
+
+3. **Create and push tag**:
+   ```bash
+   git tag -a vX.Y.Z -m "Release version X.Y.Z"
+   git push origin master
+   git push origin vX.Y.Z
+   ```
+
+4. **GitHub Actions** will automatically:
+   - Build binaries for multiple platforms
+   - Create a GitHub release with the binaries attached
+   - Publish to npm registry
+
+The release workflow is defined in `.github/workflows/release.yml` and triggers on version tags.
+
 The project uses:
 - [just](https://github.com/casey/just) for task running
 - [golangci-lint v2](https://golangci-lint.run/) for code quality
