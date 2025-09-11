@@ -375,7 +375,6 @@ func (t *Timer) promptFlowModeInfo() tea.Cmd {
 			Title("Category").
 			Options(options...).
 			Height(maxDropdownHeight). // Dynamically limit dropdown height
-			Filterable(true).
 			Filtering(true).
 			Value(&t.selectedTag))
 	}
