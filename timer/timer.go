@@ -383,10 +383,15 @@ func (t *Timer) promptFlowModeInfo() tea.Cmd {
 		Value(&t.estimatedTimeStr).
 		Placeholder("e.g., 25m, 1h30m"))
 	
-	// Create a form with the fields using compact layout
-	form := huh.NewForm(
-		huh.NewGroup(fields...),
-	).WithWidth(formWidth)
+	// Create separate groups for pagination - one field per page
+	var groups []*huh.Group
+	totalFields := len(fields)
+	for i, field := range fields {
+		title := fmt.Sprintf("Flow timer setup (%d/%d)", i+1, totalFields)
+		groups = append(groups, huh.NewGroup(field).Title(title))
+	}
+	
+	form := huh.NewForm(groups...).WithWidth(formWidth)
 	
 	// Try to make the form fit in small terminals
 	if t.terminalHeight > 0 && t.terminalHeight < 20 {

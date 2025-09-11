@@ -1,5 +1,11 @@
 ## Unreleased
 
+## 1.7.1 (2025-09-11)
+
+### Changed  
+- Implement form pagination for flow timer setup to improve usability in small terminals
+- Update all headings and form titles to use sentence case formatting
+
 ### Fixed
 - Remove task names from being saved as tags in flow mode
 - Remove unused sessionHelperReadOnly function that was causing linter errors
