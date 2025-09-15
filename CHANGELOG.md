@@ -1,3 +1,13 @@
+## 1.7.4 (2025-09-11)
+
+### Fixed
+- Fix text replication issue when resizing terminal window
+- Fix task name coloring issues when text wraps by using MaxWidth and Render methods
+
+### Changed
+- Remove pagination heading "Flow timer setup (1/4)" from flow timer form
+- Simplify description field title and placeholder text for better readability
+
 ## 1.7.3 (2025-09-11)
 
 ### Fixed

@@ -143,25 +143,19 @@ func (t *Timer) timerView() string {
 				)
 				s.WriteString("\n")
 				
-				// Task name on its own line with wrapping
-				s.WriteString(
-					lipgloss.NewStyle().
-						Foreground(lipgloss.Color("#B0DB43")). // Neon green
-						Width(maxWidth).
-						SetString(t.taskName).
-						String(),
-				)
+				// Task name on its own line - use Render instead of SetString for proper wrapping
+				taskStyle := lipgloss.NewStyle().
+					Foreground(lipgloss.Color("#B0DB43")). // Neon green
+					MaxWidth(maxWidth)
+				s.WriteString(taskStyle.Render(t.taskName))
 				s.WriteString("\n")
 				
 				// Task description if provided
 				if t.taskDescription != "" {
-					s.WriteString(
-						lipgloss.NewStyle().
-							Foreground(lipgloss.Color("#888888")). // Light gray
-							Width(maxWidth).
-							SetString(t.taskDescription).
-							String(),
-					)
+					descStyle := lipgloss.NewStyle().
+						Foreground(lipgloss.Color("#888888")). // Light gray
+						MaxWidth(maxWidth)
+					s.WriteString(descStyle.Render(t.taskDescription))
 					s.WriteString("\n")
 				}
 				
