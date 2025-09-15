@@ -219,14 +219,33 @@ func (t *Timer) timerView() string {
 		}
 		s.WriteString("/" + estimatedDisplay)
 		
-		// Progress bar based on estimated time
-		percent := t.elapsedTime.Seconds() / t.estimatedTime.Seconds()
-		if percent > 1 {
-			percent = 1
+		// Progress bar and percentage based on estimated time
+		actualPercent := t.elapsedTime.Seconds() / t.estimatedTime.Seconds()
+
+		// Keep progress bar capped at 100% but show actual percentage
+		progressBarPercent := actualPercent
+		if progressBarPercent > 1 {
+			progressBarPercent = 1
 		}
-		
+
 		s.WriteString("\n\n")
-		s.WriteString(t.progress.ViewAs(percent))
+		s.WriteString(t.progress.ViewAs(progressBarPercent))
+
+		// Display actual percentage with color coding
+		percentageText := fmt.Sprintf("%.0f%%", actualPercent*100)
+		if actualPercent > 1 {
+			// Red color for overtime
+			s.WriteString(" ")
+			s.WriteString(
+				lipgloss.NewStyle().
+					Foreground(lipgloss.Color("#FF4444")).
+					SetString(percentageText).
+					String(),
+			)
+		} else {
+			// Normal color for under/on time
+			s.WriteString(" " + percentageText)
+		}
 		s.WriteString("\n")
 		s.WriteString(t.helpView())
 		

@@ -1,3 +1,12 @@
+## 1.7.6 (2025-09-11)
+
+### Added
+- Show overtime percentage above 100% (e.g., 101%, 120%) when going past estimated time
+- Display overtime percentage in red color for visual feedback
+
+### Changed
+- Progress bar remains capped at 100% while percentage text shows actual progress
+
 ## 1.7.5 (2025-09-11)
 
 ### Fixed
