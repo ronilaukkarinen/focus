@@ -41,7 +41,7 @@ func (t *Timer) completionCelebrationView() string {
 	taskCompleteStyle := lipgloss.NewStyle().
 		Bold(true).
 		Foreground(lipgloss.Color("#FFD700")).
-		Align(lipgloss.Center).
+		Align(lipgloss.Left).
 		Width(maxWidth)
 	
 	if t.taskName != "" {
