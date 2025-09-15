@@ -13,6 +13,7 @@ import (
 	"os"
 	"os/exec"
 	"path/filepath"
+	"strings"
 	"time"
 
 	"github.com/adrg/xdg"
@@ -409,10 +410,29 @@ func (t *Timer) promptFlowModeInfo() tea.Cmd {
 	return t.soundForm.Init()
 }
 
+// normalizeDurationString normalizes various time formats to Go's duration format
+func normalizeDurationString(s string) string {
+	// Replace common variations with standard format
+	result := s
+
+	// Replace "min" with "m"
+	result = strings.ReplaceAll(result, "min", "m")
+
+	// Replace "hour" or "hr" with "h"
+	result = strings.ReplaceAll(result, "hour", "h")
+	result = strings.ReplaceAll(result, "hr", "h")
+
+	// Remove spaces between number and unit (e.g., "1h 30m" -> "1h30m")
+	result = strings.ReplaceAll(result, " ", "")
+
+	return result
+}
+
 // initFlowTimer initializes the timer in flow mode (counting up)
 func (t *Timer) initFlowTimer() error {
-	// Parse the estimated time string
-	dur, err := time.ParseDuration(t.estimatedTimeStr)
+	// Parse the estimated time string with normalization
+	normalizedTime := normalizeDurationString(t.estimatedTimeStr)
+	dur, err := time.ParseDuration(normalizedTime)
 	if err != nil {
 		// Default to 25 minutes if parsing fails
 		dur = 25 * time.Minute

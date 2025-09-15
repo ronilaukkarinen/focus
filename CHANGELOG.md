@@ -1,3 +1,8 @@
+## 1.7.5 (2025-09-11)
+
+### Fixed
+- Improve time parsing to support flexible formats like "1h30min", "1h 30m", "1h15min", "1h30m"
+
 ## 1.7.4 (2025-09-11)
 
 ### Fixed
