@@ -3,6 +3,7 @@ package timer
 import (
 	"fmt"
 	"strings"
+	"time"
 
 	"github.com/charmbracelet/bubbles/key"
 	"github.com/charmbracelet/lipgloss"
@@ -120,15 +121,20 @@ func (t *Timer) timerView() string {
 			// Session message in dimmed color
 			sessionMsg := t.Opts.Work.Message + " "
 			
-			// "until" time in dimmed color
+			// "until" time in dimmed color (without seconds)
 			var timeFormat string
 			if t.Opts.Settings.TwentyFourHour {
-				timeFormat = "15:04:05"
+				timeFormat = "15:04"
 			} else {
-				timeFormat = "03:04:05 PM"
+				timeFormat = "03:04 PM"
 			}
-			// Calculate the estimated end time dynamically from start time + estimated duration
-			estimatedEndTime := t.StartTime.Add(t.estimatedTime)
+			// Calculate the estimated end time dynamically based on remaining time
+			// This accounts for pauses by using current time + remaining time
+			remainingTime := t.estimatedTime - t.elapsedTime
+			if remainingTime < 0 {
+				remainingTime = 0
+			}
+			estimatedEndTime := time.Now().Add(remainingTime)
 			untilTime := " until " + estimatedEndTime.Format(timeFormat)
 			
 			// Calculate available space for task name
