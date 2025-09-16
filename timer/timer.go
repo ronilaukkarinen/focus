@@ -164,7 +164,10 @@ func New(dbClient store.DB, cfg *config.Config) (*Timer, error) {
 		db:       dbClient,
 		Opts:     cfg,
 		help:     help.New(),
-		progress: progress.New(progress.WithDefaultGradient()),
+		progress: progress.New(
+			progress.WithDefaultGradient(),
+			progress.WithoutPercentage(),
+		),
 		flowMode: cfg.CLI.FlowMode,
 		taskName: cfg.CLI.TaskName,
 		estimatedTime: cfg.CLI.EstimatedTime,

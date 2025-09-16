@@ -1,3 +1,14 @@
+## 1.7.7 (2025-09-16)
+
+### Fixed
+- Fix "until" time showing incorrect time when paused (now shows "(paused)")
+- Fix "until" time not updating continuously after pause/resume
+- Remove seconds from "until" time display (now shows HH:MM only)
+- Fix duplicate percentage display in progress bar
+
+### Changed
+- Left align "Finished:" text in completion view for better readability
+
 ## 1.7.6 (2025-09-11)
 
 ### Added

@@ -129,13 +129,19 @@ func (t *Timer) timerView() string {
 				timeFormat = "03:04 PM"
 			}
 			// Calculate the estimated end time dynamically based on remaining time
-			// This accounts for pauses by using current time + remaining time
-			remainingTime := t.estimatedTime - t.elapsedTime
-			if remainingTime < 0 {
-				remainingTime = 0
+			var untilTime string
+			if !t.clock.Running() && !t.clock.Timedout() {
+				// When paused, don't show "until" time as it's not accurate
+				untilTime = " (paused)"
+			} else {
+				// Only show "until" time when timer is running
+				remainingTime := t.estimatedTime - t.elapsedTime
+				if remainingTime < 0 {
+					remainingTime = 0
+				}
+				estimatedEndTime := time.Now().Add(remainingTime)
+				untilTime = " until " + estimatedEndTime.Format(timeFormat)
 			}
-			estimatedEndTime := time.Now().Add(remainingTime)
-			untilTime := " until " + estimatedEndTime.Format(timeFormat)
 			
 			// Calculate available space for task name
 			availableWidth := maxWidth - len(sessionMsg) - len(untilTime)

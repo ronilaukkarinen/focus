@@ -8,7 +8,7 @@
    <a href="https://goreportcard.com/report/github.com/ronilaukkarinen/focus"><img src="https://goreportcard.com/badge/github.com/ronilaukkarinen/focus" alt="GoReportCard"></a>
    <a href="https://github.com/ronilaukkarinen/focus"><img src="https://img.shields.io/badge/go-1.24-blue.svg" alt="Go version"></a>
    <a href="https://github.com/ronilaukkarinen/focus/blob/master/LICENCE"><img src="https://img.shields.io/github/license/ronilaukkarinen/focus.svg" alt="LICENCE"></a>
-   <a href="https://github.com/ronilaukkarinen/focus/releases/"><img src="https://img.shields.io/badge/version-1.7.6-blue.svg" alt="Latest release"></a>
+   <a href="https://github.com/ronilaukkarinen/focus/releases/"><img src="https://img.shields.io/badge/version-1.7.7-blue.svg" alt="Latest release"></a>
 </p>
 
 <h1 align="center">Focus on your task - with flow timer!</h1>
