@@ -1,3 +1,8 @@
+## 1.7.8 (2025-09-16)
+
+### Changed
+- Remove description field from flow timer setup form for simpler, faster task entry
+
 ## 1.7.7 (2025-09-16)
 
 ### Fixed
