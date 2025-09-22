@@ -15,6 +15,7 @@ session_cmd: ""
 short_break_color: '#12EAEA'
 short_break_duration: 5m
 short_break_msg: Take a breather
+show_description: false
 sound: ""
 sound_on_break: false
 strict: false
