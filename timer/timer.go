@@ -355,9 +355,17 @@ func (t *Timer) promptFlowModeInfo() tea.Cmd {
 		Placeholder("What are you working on?").
 		CharLimit(200)) // Allow longer task names
 	
-	// Description field removed - can be enabled in future if needed
+	// Add task description (optional, controlled by config)
 	// Reset description to empty for each new flow session
 	t.taskDescription = ""
+	if t.Opts.Settings.ShowDescription {
+		fields = append(fields, huh.NewInput().
+			Key("taskDescription").
+			Title("Description").
+			Value(&t.taskDescription).
+			Placeholder("Optional details...").
+			CharLimit(500))
+	}
 	
 	// Add tag selection if pre-defined tags are available
 	if len(t.Opts.Settings.PreDefinedTags) > 0 {

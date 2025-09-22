@@ -48,6 +48,7 @@ type (
 		FlowBellSound     string   `mapstructure:"flow_bell_sound"`
 		FlowDefault       bool     `mapstructure:"flow_default"`
 		ConfettiEnabled   bool     `mapstructure:"confetti_enabled"`
+		ShowDescription   bool     `mapstructure:"show_description"`
 		PreDefinedTags    []string `mapstructure:"pre_defined_tags"`
 	}
 

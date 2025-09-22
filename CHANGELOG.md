@@ -1,3 +1,9 @@
+## 1.7.9 (2025-09-16)
+
+### Added
+- Add `show_description` config option to enable/disable description field in flow timer setup
+- Description field is now disabled by default, can be enabled in config.yml with `show_description: true`
+
 ## 1.7.8 (2025-09-16)
 
 ### Changed
